@@ -7,9 +7,6 @@ import lexer.token.TokenType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Diego Baldassare on 2019-06-18.
- */
 public abstract class LexerState {
 
     private List<LexerTransition> transitions = new ArrayList<>();
@@ -23,15 +20,13 @@ public abstract class LexerState {
         for (LexerTransition t: transitions) {
             t.accept(c);
         }
-
+        return new SpaceState();
     }
 
     public Token next(LexerAutomaton context) {
 
         return generateToken(context);
     }
-
-    protected abstract TokenType getTokenType();
 
     protected abstract TokenType getTokenType();
 
