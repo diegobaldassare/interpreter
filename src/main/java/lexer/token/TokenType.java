@@ -1,49 +1,34 @@
 package lexer.token;
 
 /**
- * Created by Diego Baldassare on 2019-06-18.
+ * This class represents the type of a Token.
+ *
+ * Note that it describes the lexical symbols (i.e. EQUALS)
+ * and not its meanings as the operations that can perform (i.e. ASSIGNATION).
+ *
+ * Note that quote marks are not a token type, since it is the lexicographical form to recognize a string literal.
  */
 public enum TokenType {
 
     IDENTIFIER, //name of variables
 
-    STRING_LITERAL, //[0-9]
-    NUMBER_LITERAL, //[a-zA-Z]
+    STRING_LITERAL, // [a-zA-Z] (anything between "")
+    NUMBER_LITERAL, // [0-9]
 
-    STRING_TYPE("string"), //string primitive data type
-    NUMBER_TYPE("number"), //number primitive data type
+    PLUS_SYMBOL, // "+"
+    SLASH, // "-"
+    ASTERISK, // "*"
+    FORWARD_SLASH, // "/"
 
-    ADDITION("+"),
-    SUBTRACTION("-"),
-    MULTIPLICATION("*"),
-    DIVISION("/"),
+    COLON, // ":"
+    SEMICOLON, // ";"
+    EQUALS, // "="
+    SPACE, // " "
 
-    DECLARATION(":"),
-    ASSIGNATION("="),
-
-    END_STATEMENT(";"),
-
-    NEW_LINE("\\n"),
-    SPACE(" "),
-
-    LET("let"),
-    PRINT("print");
-
-    private String representation;
-
-    TokenType() {}
-
-    TokenType(String representation) {
-        this.representation = representation;
-    }
-
-    @Override
-    public String toString() {
-        if (representation != null) return String.format("%s(%s)", this.name(), representation);
-        return this.name();
-    }
-
-    public String getRepresentation() {
-        return representation;
-    }
+    STRING_TYPE, // "string" (string primitive data type)
+    NUMBER_TYPE, // "number" (number primitive data type)
+    LET, // "let"
+    PRINT, // "print"
+    LEFT_PARENTHESIS, // "("
+    RIGHT_PARENTHESIS, // ")"
 }

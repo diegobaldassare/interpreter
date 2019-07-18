@@ -1,8 +1,5 @@
 package lexer.token;
 
-/**
- * Created by Diego Baldassare on 2019-06-18.
- */
 public class TokenImpl implements Token {
 
     private final TokenType tokenType;
@@ -42,5 +39,16 @@ public class TokenImpl implements Token {
     @Override
     public String value() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TokenImpl token = (TokenImpl) o;
+        return fromColumn == token.fromColumn &&
+                line == token.line &&
+                tokenType == token.tokenType &&
+                value.equals(token.value);
     }
 }
