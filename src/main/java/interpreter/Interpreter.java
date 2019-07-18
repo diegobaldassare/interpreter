@@ -10,7 +10,6 @@ public interface Interpreter {
     /**
      * Executes the ASTNode with all its statements.
      * @param head
-     * @return
      */
-    public Result interpret(ASTNode head);
+    public void interpret(ASTNode head);
 }

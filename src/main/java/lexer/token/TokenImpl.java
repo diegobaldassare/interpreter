@@ -20,27 +20,27 @@ public class TokenImpl implements Token {
     }
 
     @Override
-    public TokenType getTokenType() {
+    public TokenType tokenType() {
         return tokenType;
     }
 
     @Override
-    public int getFromColumn() {
+    public int fromColumn() {
         return fromColumn;
     }
 
     @Override
-    public int getToColumn() {
+    public int toColumn() {
         return toColumn;
     }
 
     @Override
-    public int getLine() {
+    public int line() {
         return line;
     }
 
     @Override
-    public String getValue() {
+    public String value() {
         return value;
     }
 }

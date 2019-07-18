@@ -21,8 +21,6 @@ public enum TokenType {
     DECLARATION(":"),
     ASSIGNATION("="),
 
-    LEFT_PARENTHESIS("("),
-    RIGHT_PARENTHESIS(")"),
     END_STATEMENT(";"),
 
     NEW_LINE("\\n"),

@@ -11,8 +11,8 @@ public interface Lexer {
 
     /**
      * Reads all the code statements and returns them converted into an interpretable Token.
-     * @param statements
+     * @param input
      * @return
      */
-    public List<Token> lex(String statements);
+    public List<Token> lex(String input);
 }

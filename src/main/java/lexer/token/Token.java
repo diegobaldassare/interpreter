@@ -5,10 +5,10 @@ package lexer.token;
  */
 public interface Token {
 
-    TokenType getTokenType();
-    String getValue();
+    TokenType tokenType();
+    String value();
 
-    int getFromColumn();
-    int getToColumn();
-    int getLine();
+    int line();
+    int fromColumn();
+    int toColumn();
 }

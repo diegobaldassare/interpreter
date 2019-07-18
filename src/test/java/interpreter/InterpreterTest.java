@@ -1,26 +1,19 @@
-import compiler.Compiler;
-import compiler.CompilerImpl;
-import diegobaldassare.interpreter.Interpreter;
-import diegobaldassare.interpreter.InterpreterException;
-import diegobaldassare.interpreter.InterpreterImpl;
-import diegobaldassare.lexer.Lexer;
-import diegobaldassare.lexer.LexerAutomaton;
-import diegobaldassare.lexer.TokenConsumer;
+package interpreter;
+
+import lexer.Lexer;
 import org.junit.Before;
 import org.junit.Test;
 import parser.Parser;
-import parser.ParserImpl;
-import parser.ProgramController;
+import parser.ParserAutomaton;
 
-public class CompilerTest {
+public class InterpreterTest {
 
     private Compiler compiler;
 
     @Before
     public void setUp() {
-        TokenConsumer consumer = new TokenConsumer();
-        Lexer lexer = new LexerAutomaton(consumer);
-        Parser parser = new ParserImpl(new ProgramController());
+        Lexer lexer = new LexerAutomaton();
+        Parser parser = new ParserAutomaton(new ProgramController());
         Interpreter interpreter = new InterpreterImpl();
 
         compiler = new CompilerImpl(lexer, parser, interpreter);

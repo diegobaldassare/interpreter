@@ -1,15 +1,15 @@
 import interpreter.Interpreter;
 import interpreter.InterpreterImpl;
 import lexer.Lexer;
-import lexer.LexerImpl;
+import lexer.state.LexerAutomaton;
 import parser.Parser;
-import parser.ParserImpl;
+import parser.ParserAutomaton;
 
 public class Main {
 
     public static void main(String[] args) {
-        final Lexer lexer = new LexerImpl();
-        final Parser parser = new ParserImpl();
+        final Lexer lexer = new LexerAutomaton();
+        final Parser parser = new ParserAutomaton();
         final Interpreter interpreter = new InterpreterImpl();
 
         //Code statements examples:
