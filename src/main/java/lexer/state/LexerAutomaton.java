@@ -31,6 +31,7 @@ public class LexerAutomaton implements Lexer {
                 toColumn = i;
                 lexeme = lexeme.concat(c.toString());
                 i++;
+                if (i >= input.length()) break;
                 c = input.charAt(i);
             }
 

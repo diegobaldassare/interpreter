@@ -23,8 +23,9 @@ class SpaceState extends LexerState {
 
     @Override
     TokenType getTokenType(LexerAutomaton context) {
-        if (context.getOutput().get(context.getOutput().size()).tokenType().equals(TokenType.SPACE))
-            context.getOutput().remove(context.getOutput().size());
+        if (!context.getOutput().isEmpty())
+            if (context.getOutput().get(context.getOutput().size()).tokenType().equals(TokenType.SPACE))
+                context.getOutput().remove(context.getOutput().size());
         return TokenType.SPACE;
     }
 }

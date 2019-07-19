@@ -27,7 +27,7 @@ class StringLiteralState extends LexerState {
 
     @Override
     LexerState next() {
-        return AlphanumericState.getInstance();
+        return new NumberLiteralState();
     }
 
     @Override

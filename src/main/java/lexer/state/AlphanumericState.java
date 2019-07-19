@@ -42,7 +42,7 @@ class AlphanumericState extends LexerState {
 
     @Override
     LexerState next() {
-        return new NumberLiteralState();
+        return new SpaceState();
     }
 
     @Override

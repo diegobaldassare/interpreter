@@ -48,7 +48,7 @@ class SymbolState extends LexerState {
 
     @Override
     TokenType getTokenType(LexerAutomaton context) {
-        return symbols.get(context.getLexeme().charAt(context.getLexeme().length()));
+        return symbols.get(context.getC());
     }
 
     static SymbolState getInstance() {

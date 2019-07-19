@@ -2,23 +2,23 @@ package lexer.state;
 
 import lexer.token.TokenType;
 
-import static common.Constants.NUMBERS;
+import static common.Constants.NUMBER;
 
 class NumberLiteralState extends LexerState {
 
     @Override
     boolean accepts(Character c) {
-        return c.toString().matches(NUMBERS);
+        return c.toString().matches(NUMBER);
     }
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return true;
+        return context.getC().toString().matches(NUMBER);
     }
 
     @Override
     LexerState next() {
-        return new SpaceState();
+        return AlphanumericState.getInstance();
     }
 
     @Override
