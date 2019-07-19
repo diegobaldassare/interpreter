@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
 public class LexerTest {
 
@@ -86,7 +85,7 @@ public class LexerTest {
 
         List<Token> expected = Arrays.asList(firstExpected, secondExpected, thirdExpected);
         List<Token> actual = lexer.lex("2-1");
-        assertEquals(expected, actual);
+        assertEqualsList(expected, actual);
     }
 
     @Test
@@ -99,7 +98,7 @@ public class LexerTest {
 
         List<Token> expected = Arrays.asList(firsExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected);
         List<Token> actual = lexer.lex("2 * 2");
-        assertEquals(expected, actual);
+        assertEqualsList(expected, actual);
     }
 
     @Test
@@ -174,48 +173,7 @@ public class LexerTest {
             System.out.println(e.getMessage());
         }
     }
-
-    @Test
-    public void test022_MultipleStatements(){
-        Token firsExpected = new TokenImpl(TokenType.PRINT, 0, 0, 0,"print");
-        Token secondExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0,"(");
-        Token thirdExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0,"4");
-        Token fourthExpected = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 0, 0, 0,")");
-        Token fifthExpected = new TokenImpl(TokenType.SEMICOLON, 0, 0, 0,";");
-        Token sixthExpected = new TokenImpl(TokenType.PRINT, 0, 0, 0,"print");
-        Token seventhExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0,"(");
-        Token eighthExpected = new TokenImpl(TokenType.STRING_LITERAL, 0, 0, 0,"test");
-        Token ninthExpected = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 0, 0, 0,")");
-        Token tenthExpected = new TokenImpl(TokenType.SEMICOLON, 0, 0, 0,";");
-        List<Token> expected = Arrays.asList(firsExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected,
-                sixthExpected, seventhExpected, eighthExpected, ninthExpected, tenthExpected);
-
-        List<Token> actual = lexer.lex("print(4);print(\"test\");");
-        assertEqualsList(expected, actual);
-    }
-
-    @Test
-    public void test023_DeclarationAssignationAndOperation(){
-        Token firsExpected = new TokenImpl(TokenType.LET, 0, 0, 0,"let");
-        Token secondExpected = new TokenImpl(TokenType.SPACE, 0, 0, 0," ");
-        Token thirdExpected = new TokenImpl(TokenType.IDENTIFIER, 0, 0, 0,"a");
-        Token fourthExpected = new TokenImpl(TokenType.COLON, 0, 0, 0,":");
-        Token fifthExpected = new TokenImpl(TokenType.SPACE, 0, 0, 0," ");
-        Token sixthExpected = new TokenImpl(TokenType.STRING_TYPE, 0, 0, 0,"string");
-        Token seventhExpected = new TokenImpl(TokenType.SPACE, 0, 0, 0," ");
-        Token eighthExpected = new TokenImpl(TokenType.EQUALS, 0, 0, 0,"=");
-        Token ninthExpected = new TokenImpl(TokenType.SPACE, 0, 0, 0," ");
-        Token tenthExpected = new TokenImpl(TokenType.STRING_LITERAL, 0, 0, 0,"te");
-        Token eleventhExpected = new TokenImpl(TokenType.PLUS_SYMBOL, 0, 0, 0,"+");
-        Token twelfthExpected = new TokenImpl(TokenType.STRING_LITERAL, 0, 0, 0,"st");
-        Token thirteenthExpected = new TokenImpl(TokenType.SEMICOLON, 0, 0, 0,";");
-        List<Token> expected = Arrays.asList(firsExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected, sixthExpected,
-                seventhExpected, eighthExpected, ninthExpected, tenthExpected, eleventhExpected, twelfthExpected, thirdExpected);
-
-        List<Token> actual = lexer.lex("let a: string =\"te\"+\"st\";");
-        assertEqualsList(expected, actual);
-    }
-
+    
     private void assertEqualsList(List<Token> expectedList, List<Token> actualList) {
 //        if (actualList.size() != expectedList.size()) throw new RuntimeException("Different size");
         for (int i = 0; i < actualList.size(); i++) {
