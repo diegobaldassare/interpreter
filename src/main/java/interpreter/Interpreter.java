@@ -1,15 +1,9 @@
 package interpreter;
 
-import parser.ast.ASTNode;
+import parser.nodes.ASTNode;
 
-/**
- * Created by Diego Baldassare on 2019-06-18.
- */
 public interface Interpreter {
 
-    /**
-     * Executes the ASTNode with all its statements.
-     * @param head
-     */
-    public void interpret(ASTNode head);
+    void interpret(ASTNode node);
+    void interpret(String input);
 }

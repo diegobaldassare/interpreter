@@ -173,7 +173,7 @@ public class LexerTest {
             System.out.println(e.getMessage());
         }
     }
-    
+
     private void assertEqualsList(List<Token> expectedList, List<Token> actualList) {
 //        if (actualList.size() != expectedList.size()) throw new RuntimeException("Different size");
         for (int i = 0; i < actualList.size(); i++) {
