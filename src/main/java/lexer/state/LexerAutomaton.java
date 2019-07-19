@@ -4,29 +4,39 @@ import lexer.Lexer;
 import lexer.token.Token;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Diego Baldassare on 2019-06-18.
- */
 public class LexerAutomaton implements Lexer {
 
     private LexerState current;
     private List<Character> lexeme;
-    private int line;
+    private int line = 0;
     private int fromColumn;
     private int toColumn;
+    private List<Token> output = new ArrayList<>();
 
     @Override
     public List<Token> lex(String input) {
-        List<Token> output = new ArrayList<>();
+        current = LexerState.getFirstState();
+        lexeme = new ArrayList<>();
 
-        for (int i = 0; i < input.length(); i++) {
-            Character c = input.charAt(i);
-            while (current.accept(c)) {
+        int i = 0;
+        Character c = input.charAt(i);
+        while (i < input.length()) {
+            fromColumn = i;
+            while (current.accepts(c)) {
                 lexeme.add(c);
+                c = input.charAt(i);
+                i++;
+                toColumn = i;
             }
-            output.add(current.next(this));
+            if (current.isValidToken(this)) {
+                output.add(current.generateToken(this));
+                lexeme = new ArrayList<>();
+            }
+            else
+                current = current.next();
         }
         return output;
     }
@@ -59,7 +69,19 @@ public class LexerAutomaton implements Lexer {
         this.toColumn = toColumn;
     }
 
-    public String getLexeme() {
+    String getLexeme() {
         return lexeme.toString();
+    }
+
+    void setLexeme(List<Character> lexeme) {
+        this.lexeme = lexeme;
+    }
+
+    public List<Token> getOutput() {
+        return output;
+    }
+
+    public void setOutput(List<Token> output) {
+        this.output = output;
     }
 }

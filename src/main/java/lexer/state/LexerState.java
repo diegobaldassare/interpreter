@@ -7,34 +7,38 @@ import lexer.token.TokenType;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class LexerState {
+abstract class LexerState {
 
     private List<LexerTransition> transitions = new ArrayList<>();
-    private boolean finalState = false;
 
-    public Token generateToken(LexerAutomaton context) {
-        return new TokenImpl(getTokenType(), context.getFromColumn(), context.getToColumn(), context.getLine(), context.getLexeme());
+    LexerState() {
     }
 
-    public LexerState accept(Character c) {
-        for (LexerTransition t: transitions) {
-            t.accept(c);
-        }
-        return new SpaceState();
+    public LexerState(LexerTransition transition) {
+        this.transitions.add(transition);
     }
 
-    public Token next(LexerAutomaton context) {
+    abstract boolean accepts(Character c);
 
-        return generateToken(context);
+    abstract boolean isValidToken(LexerAutomaton context);
+
+    abstract LexerState next();
+
+    abstract TokenType getTokenType(LexerAutomaton context);
+
+    Token generateToken(LexerAutomaton context) {
+        return new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn(), context.getLine(), context.getLexeme());
     }
 
-    protected abstract TokenType getTokenType();
+    List<LexerTransition> getTransitions() {
+        return transitions;
+    }
 
-    public void setTransitions(List<LexerTransition> transitions) {
+    void setTransitions(List<LexerTransition> transitions) {
         this.transitions = transitions;
     }
 
-    public void setFinalState(boolean finalState) {
-        this.finalState = finalState;
+    static LexerState getFirstState() {
+        return KeywordsState.getInstance();
     }
 }

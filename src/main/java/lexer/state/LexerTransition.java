@@ -1,44 +1,64 @@
 package lexer.state;
 
-import lexer.Lexer;
+import lexer.token.TokenType;
 
-import java.util.Optional;
-
-/**
- * Created by Diego Baldassare on 2019-06-25.
- */
 public class LexerTransition {
 
     private Character label;
     private LexerState next;
+    private boolean endToken; //determines the end of the token
+    private TokenType tokenType;
 
-    public LexerTransition(Character label, LexerState next) {
+    public LexerTransition(Character label, LexerState next, boolean endToken) {
         this.label = label;
         this.next = next;
     }
 
-    public Optional<LexerState> accept(Character c) {
-        if (label.equals(c)) return Optional.of(next);
-        return Optional.empty();
+    boolean accepts(Character c) {
+         return label.equals(c);
     }
 
-    public LexerState next() {
+    /**
+     * If it is the end of the token it
+     * means that a valid token was formed.
+     */
+    boolean isValidToken() {
+        return endToken;
+    }
+
+    LexerState next() {
         return next;
     }
 
-    public Character getLabel() {
+    TokenType getTokenType() {
+        return tokenType;
+    }
+
+    Character getLabel() {
         return label;
     }
 
-    public void setLabel(Character label) {
+    void setLabel(Character label) {
         this.label = label;
     }
 
-    public LexerState getNext() {
+    LexerState getNext() {
         return next;
     }
 
-    public void setNext(LexerState next) {
+    boolean hasNext() {
+        return next != null;
+    }
+
+    void setNext(LexerState next) {
         this.next = next;
+    }
+
+    void setEndToken(boolean endToken) {
+        this.endToken = endToken;
+    }
+
+    void setTokenType(TokenType tokenType) {
+        this.tokenType = tokenType;
     }
 }

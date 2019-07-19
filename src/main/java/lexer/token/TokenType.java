@@ -10,25 +10,29 @@ package lexer.token;
  */
 public enum TokenType {
 
-    IDENTIFIER, //name of variables
+    // Keywords
+    STRING_TYPE, // "string" (string primitive data type)
+    NUMBER_TYPE, // "number" (number primitive data type)
+    PRINT, // "print"
+    LET, // "let"
 
-    STRING_LITERAL, // [a-zA-Z] (anything between "")
-    NUMBER_LITERAL, // [0-9]
+    LEFT_PARENTHESIS, // "("
+    RIGHT_PARENTHESIS, // ")"
 
     PLUS_SYMBOL, // "+"
     SLASH, // "-"
     ASTERISK, // "*"
     FORWARD_SLASH, // "/"
 
+    EQUALS, // "="
     COLON, // ":"
     SEMICOLON, // ";"
-    EQUALS, // "="
+
     SPACE, // " "
 
-    STRING_TYPE, // "string" (string primitive data type)
-    NUMBER_TYPE, // "number" (number primitive data type)
-    LET, // "let"
-    PRINT, // "print"
-    LEFT_PARENTHESIS, // "("
-    RIGHT_PARENTHESIS, // ")"
+    IDENTIFIER, //name of variables
+
+    STRING_LITERAL, // [a-zA-Z] (anything between "")
+
+    NUMBER_LITERAL, // [0-9]
 }

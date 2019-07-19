@@ -2,17 +2,29 @@ package lexer.state;
 
 import lexer.token.TokenType;
 
-/**
- * Created by Diego Baldassare on 2019-06-25.
- */
-public class SpaceState extends LexerState {
+import static common.Constants.SPACE;
+
+class SpaceState extends LexerState {
+
     @Override
-    protected TokenType getTokenType() {
-        return TokenType.SPACE;
+    boolean accepts(Character c) {
+        return c.equals(SPACE);
     }
 
     @Override
-    public boolean accept(Character c) {
-        return false;
+    boolean isValidToken(LexerAutomaton context) {
+        return true;
+    }
+
+    @Override
+    LexerState next() {
+        return SymbolState.getInstance();
+    }
+
+    @Override
+    TokenType getTokenType(LexerAutomaton context) {
+        if (context.getOutput().get(context.getOutput().size()).tokenType().equals(TokenType.SPACE))
+            context.getOutput().remove(context.getOutput().size());
+        return TokenType.SPACE;
     }
 }

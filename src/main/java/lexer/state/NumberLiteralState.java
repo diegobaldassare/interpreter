@@ -2,13 +2,13 @@ package lexer.state;
 
 import lexer.token.TokenType;
 
-import static common.Constants.ALPHANUMERIC;
+import static common.Constants.NUMBERS;
 
-class IdentifierState extends LexerState {
+class NumberLiteralState extends LexerState {
 
     @Override
     boolean accepts(Character c) {
-        return ALPHANUMERIC.contains(c.toString());
+        return NUMBERS.contains(c.toString());
     }
 
     @Override
@@ -18,11 +18,11 @@ class IdentifierState extends LexerState {
 
     @Override
     LexerState next() {
-        return new NumberLiteralState();
+        return KeywordsState.getInstance();
     }
 
     @Override
     TokenType getTokenType(LexerAutomaton context) {
-        return TokenType.IDENTIFIER;
+        return TokenType.NUMBER_LITERAL;
     }
 }
