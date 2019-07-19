@@ -13,7 +13,7 @@ class SpaceState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return true;
+        return context.getC() == SPACE;
     }
 
     @Override

@@ -38,7 +38,7 @@ class SymbolState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return true;
+        return symbols.containsKey(context.getC());
     }
 
     @Override

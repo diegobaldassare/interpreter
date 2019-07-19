@@ -8,4 +8,6 @@ public interface Token {
     int line();
     int fromColumn();
     int toColumn();
+
+    boolean equals(Object o);
 }

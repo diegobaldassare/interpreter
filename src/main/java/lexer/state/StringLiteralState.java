@@ -1,5 +1,7 @@
 package lexer.state;
 
+import lexer.token.Token;
+import lexer.token.TokenImpl;
 import lexer.token.TokenType;
 
 import static common.Constants.DOUBLE_QUOTE;
@@ -10,26 +12,32 @@ class StringLiteralState extends LexerState {
 
     @Override
     boolean accepts(Character c) {
-        if (openedString) {
-//            if (c.equals(DOUBLE_QUOTE)) openedString = false;
+        if (c.equals(DOUBLE_QUOTE)) {
+            if (openedString) return false;
+            openedString = true;
             return true;
         }
-        else if (c.equals(DOUBLE_QUOTE)) openedString = true;
-        return false;
+        return openedString;
     }
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return openedString && context.getLexeme().charAt(context.getLexeme().length() - 1) == DOUBLE_QUOTE;
+        return openedString && context.getC() == DOUBLE_QUOTE;
     }
 
     @Override
     LexerState next() {
-        return new IdentifierState();
+        return AlphanumericState.getInstance();
     }
 
     @Override
     TokenType getTokenType(LexerAutomaton context) {
         return TokenType.STRING_LITERAL;
+    }
+
+    @Override
+    Token generateToken(LexerAutomaton context) {
+        return new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn() + 1, context.getLine(),
+                context.getLexeme().substring(1));
     }
 }

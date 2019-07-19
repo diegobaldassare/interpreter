@@ -22,15 +22,15 @@ public class LexerTest {
     }
 
     @Test
-    public void test001_StringType() {
-        Token expected = new TokenImpl(TokenType.STRING_TYPE, 0, 5,0, "\"test\"");
+    public void test001_StringLiteral() {
+        Token expected = new TokenImpl(TokenType.STRING_LITERAL, 0, 5,0, "test");
         Token actual = lexer.lex("\"test\"").get(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void test002_NumberType() {
-        Token expected = new TokenImpl(TokenType.NUMBER_TYPE, 0, 3, 0,"123");
+    public void test002_NumberLiteral() {
+        Token expected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 3, 0,"123");
         Token actual = lexer.lex("123").get(0);
         assertEquals(expected, actual);
     }
@@ -50,15 +50,15 @@ public class LexerTest {
     }
 
     @Test
-    public void test005_NumberLiteral() {
-        Token expected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 5, 0,"number");
+    public void test005_NumberType() {
+        Token expected = new TokenImpl(TokenType.NUMBER_TYPE, 0, 5, 0,"number");
         Token actual = lexer.lex("number").get(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void test006_StringLiteral() {
-        Token expected = new TokenImpl(TokenType.STRING_LITERAL, 0, 5, 0,"string");
+    public void test006_StringType() {
+        Token expected = new TokenImpl(TokenType.STRING_TYPE, 0, 5, 0,"string");
         Token actual = lexer.lex("string").get(0);
         assertEquals(expected, actual);
     }
@@ -79,9 +79,9 @@ public class LexerTest {
 
     @Test
     public void test009_SimpleOperation() {
-        Token firstExpected = new TokenImpl(TokenType.NUMBER_TYPE, 0, 0, 0,"2");
+        Token firstExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0,"2");
         Token secondExpected = new TokenImpl(TokenType.SLASH, 1, 1, 0,"-");
-        Token thirdExpected = new TokenImpl(TokenType.NUMBER_TYPE, 2, 2, 0,"2");
+        Token thirdExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 2, 2, 0,"2");
 
         List<Token> expected = Arrays.asList(firstExpected, secondExpected, thirdExpected);
         List<Token> actual = lexer.lex("2-1");
@@ -90,11 +90,11 @@ public class LexerTest {
 
     @Test
     public void test010_OperationWithSpaces() {
-        Token firsExpected = new TokenImpl(TokenType.NUMBER_TYPE, 0, 0, 0,"2");
+        Token firsExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0,"2");
         Token secondExpected = new TokenImpl(TokenType.SPACE, 1, 1, 0," ");
         Token thirdExpected = new TokenImpl(TokenType.ASTERISK, 2, 2, 0,"*");
         Token fourthExpected = new TokenImpl(TokenType.SPACE, 3, 3, 0," ");
-        Token fifthExpected = new TokenImpl(TokenType.NUMBER_TYPE, 4, 4, 0,"2");
+        Token fifthExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 4, 4, 0,"2");
 
         List<Token> expected = Arrays.asList(firsExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected);
         List<Token> actual = lexer.lex("2 * 2");

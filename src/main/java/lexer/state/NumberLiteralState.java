@@ -8,7 +8,7 @@ class NumberLiteralState extends LexerState {
 
     @Override
     boolean accepts(Character c) {
-        return NUMBERS.contains(c.toString());
+        return c.toString().matches(NUMBERS);
     }
 
     @Override
@@ -18,7 +18,7 @@ class NumberLiteralState extends LexerState {
 
     @Override
     LexerState next() {
-        return KeywordsState.getInstance();
+        return new SpaceState();
     }
 
     @Override

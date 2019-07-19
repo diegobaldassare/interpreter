@@ -1,82 +1,82 @@
-package lexer.state;
-
-import lexer.LexerException;
-import lexer.token.TokenType;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-class KeywordsState extends LexerState {
-
-    private int currentTransition;
-    private static KeywordsState theInstance = null;
-    private final Map<String, TokenType> keywords;
-
-    // Singleton
-    private KeywordsState() {
-        keywords = initKeywords();
-    }
-
-    private Map<String, TokenType> initKeywords() {
-        Map<String, TokenType> result = new HashMap<>();
-        result.put("string", TokenType.STRING_TYPE);
-        result.put("number", TokenType.NUMBER_TYPE);
-        result.put("print", TokenType.PRINT);
-        result.put("let", TokenType.LET);
-        return result;
-    }
-
-    @Override
-    boolean accepts(Character c) {
-        for (String s : keywords.keySet()) {
-            if (s.charAt(currentTransition) == c) {
-                currentTransition++;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    boolean isValidToken(LexerAutomaton context) {
-        for (String s : keywords.keySet()) {
-            if (s.length() == currentTransition) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    LexerState next() {
-        return new StringLiteralState();
-    }
-
-    @Override
-    TokenType getTokenType(LexerAutomaton context) {
-        switch (context.getLexeme()) {
-            case "string":
-                return TokenType.STRING_TYPE;
-
-            case "number":
-                return TokenType.NUMBER_TYPE;
-
-            case "print":
-                return TokenType.PRINT;
-
-            case "let":
-                return TokenType.LET;
-        }
-        throw new LexerException(context);
-    }
-
-    static KeywordsState getInstance() {
-        if (theInstance == null)
-            theInstance = new KeywordsState();
-        return theInstance;
-    }
+//package lexer.state;
+//
+//import lexer.LexerException;
+//import lexer.token.TokenType;
+//
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//class KeywordsState extends LexerState {
+//
+//    private int currentTransition;
+//    private static KeywordsState theInstance = null;
+//    private final Map<String, TokenType> keywords;
+//
+//    // Singleton
+//    private KeywordsState() {
+//        keywords = initKeywords();
+//    }
+//
+//    private Map<String, TokenType> initKeywords() {
+//        Map<String, TokenType> result = new HashMap<>();
+//        result.put("string", TokenType.STRING_TYPE);
+//        result.put("number", TokenType.NUMBER_TYPE);
+//        result.put("print", TokenType.PRINT);
+//        result.put("let", TokenType.LET);
+//        return result;
+//    }
+//
+//    @Override
+//    boolean accepts(Character c) {
+//        for (String s : keywords.keySet()) {
+//            if (s.charAt(currentTransition) == c) {
+//                currentTransition++;
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    @Override
+//    boolean isValidToken(LexerAutomaton context) {
+//        for (String s : keywords.keySet()) {
+//            if (s.length() == currentTransition) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    @Override
+//    LexerState next() {
+//        return new StringLiteralState();
+//    }
+//
+//    @Override
+//    TokenType getTokenType(LexerAutomaton context) {
+//        switch (context.getLexeme()) {
+//            case "string":
+//                return TokenType.STRING_TYPE;
+//
+//            case "number":
+//                return TokenType.NUMBER_TYPE;
+//
+//            case "print":
+//                return TokenType.PRINT;
+//
+//            case "let":
+//                return TokenType.LET;
+//        }
+//        throw new LexerException(context);
+//    }
+//
+//    static KeywordsState getInstance() {
+//        if (theInstance == null)
+//            theInstance = new KeywordsState();
+//        return theInstance;
+//    }
 
 
 //    @Override
@@ -152,4 +152,4 @@ class KeywordsState extends LexerState {
 //            }
 //        }
 //    }
-}
+//}

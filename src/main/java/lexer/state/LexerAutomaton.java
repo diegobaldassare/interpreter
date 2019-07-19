@@ -4,37 +4,46 @@ import lexer.Lexer;
 import lexer.token.Token;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class LexerAutomaton implements Lexer {
 
     private LexerState current;
-    private List<Character> lexeme;
+    private String lexeme;
     private int line = 0;
     private int fromColumn;
     private int toColumn;
     private List<Token> output = new ArrayList<>();
+    private Character c;
 
     @Override
     public List<Token> lex(String input) {
         current = LexerState.getFirstState();
-        lexeme = new ArrayList<>();
+        lexeme = "";
 
         int i = 0;
-        Character c = input.charAt(i);
+        c = input.charAt(i);
         while (i < input.length()) {
             fromColumn = i;
+
+            // State accepts input
             while (current.accepts(c)) {
-                lexeme.add(c);
-                c = input.charAt(i);
-                i++;
                 toColumn = i;
+                lexeme = lexeme.concat(c.toString());
+                i++;
+                c = input.charAt(i);
             }
+
+            // State does not accept input:
+
+            // 1. Because it is a token
             if (current.isValidToken(this)) {
                 output.add(current.generateToken(this));
-                lexeme = new ArrayList<>();
+                lexeme = "";
+                i++;
             }
+
+            // 2. Because it is not a token
             else
                 current = current.next();
         }
@@ -70,18 +79,26 @@ public class LexerAutomaton implements Lexer {
     }
 
     String getLexeme() {
-        return lexeme.toString();
+        return lexeme;
     }
 
-    void setLexeme(List<Character> lexeme) {
+    void setLexeme(String lexeme) {
         this.lexeme = lexeme;
     }
 
-    public List<Token> getOutput() {
+    List<Token> getOutput() {
         return output;
     }
 
     public void setOutput(List<Token> output) {
         this.output = output;
+    }
+
+    public Character getC() {
+        return c;
+    }
+
+    public void setC(Character c) {
+        this.c = c;
     }
 }
