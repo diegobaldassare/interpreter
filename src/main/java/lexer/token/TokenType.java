@@ -16,6 +16,7 @@ public enum TokenType {
     PRINT, // "print"
     LET, // "let"
 
+    /// Symbols
     LEFT_PARENTHESIS, // "("
     RIGHT_PARENTHESIS, // ")"
 
@@ -28,6 +29,7 @@ public enum TokenType {
     COLON, // ":"
     SEMICOLON, // ";"
 
+    // White Spaces
     SPACE, // " "
 
     IDENTIFIER, //name of variables

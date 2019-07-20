@@ -43,7 +43,7 @@ public class ParserImpl implements Parser {
 
         final ASTNode node = statement();
 
-//        eat(SEMICOLON);
+        eat(SEMICOLON);
 
         final List<ASTNode> nodes = new ArrayList<>();
 
@@ -269,7 +269,7 @@ public class ParserImpl implements Parser {
             current = iterator.next();
         }
         else {
-            throw new RuntimeException("Invalid syntax, expected: " + kind.name());
+            throw new RuntimeException("Invalid syntax, expected: " + kind.name() + "\ncurrent: " + current.value());
         }
     }
 }

@@ -9,72 +9,55 @@ import parser.ParserImpl;
 
 public class InterpreterTest {
 
+    private Lexer lexer;
+    private Parser parser;
     private Interpreter interpreter;
 
     @Before
     public void setUp() {
-        Lexer lexer = new LexerAutomaton();
-        Parser parser = new ParserImpl();
+        lexer = new LexerAutomaton();
+        parser = new ParserImpl();
         interpreter = new InterpreterImpl();
     }
 
     @Test
-    public void testSimpleCompilation001() {
-        interpreter.interpret("let var: number;");
+    public void test001() {
+        final String s = "let var: number;";
+        interpreter.interpret(parser.parse(lexer.lex(s)));
     }
 
     @Test
-    public void testSimpleCompilation002() {
-        interpreter.interpret("let a;\na = 2;\nprint(a);");
+    public void test002() {
+        interpreter.interpret("var1 = 2 * (5 - 1);");
     }
 
     @Test
-    public void testSimpleCompilation004() {
-        interpreter.interpret("print(\"foo\");");
+    public void test003() {
+        interpreter.interpret("let var2: number;");
     }
 
     @Test
-    public void testTwoExpressionCompilation() {
-        interpreter.interpret("let a:string = \"aaa\";\nlet b:string = \"bbb\";\nprint(a+b);");
+    public void test004() {
+        interpreter.interpret("var2 = var1 - 5 * (2 - 3);");
     }
 
     @Test
-    public void testTwoExpressionCompilation2() {
-        interpreter.interpret("let a:number = 2;\nlet b:number = 8;\nprint(a+b);");
+    public void test005() {
+        interpreter.interpret("print(var2 + 1);");
     }
 
     @Test
-    public void testTwoExpressionCompilation3() {
-        interpreter.interpret("let a:string = \"2\";\nlet b:number = 8;\nprint(a+b);");
+    public void test006() {
+        interpreter.interpret("print(var1);");
     }
 
     @Test
-    public void testTwoExpressionCompilation4() {
-        interpreter.interpret("let a:number = 2+2;\nlet b:number = 3+3;\nprint(a+b);");
+    public void test007() {
+        interpreter.interpret("let var3: string;");
     }
 
     @Test
-    public void testTwoExpressionCompilation5() {
-        interpreter.interpret("let a:string = \"he\";\nlet b:string = \"llo\";\nprint(a+b);");
-    }
-
-    @Test
-    public void testManySpacesCompilation() {
-        interpreter.interpret("   \n\n   let     foo: number   = 123312313    \n   ;\n\n\n\nprint(foo)     ; ");
-    }
-
-    @Test
-    public void testReassignation() {
-        interpreter.interpret("let a:number = 2; a = 3; print(a);");
-    }
-
-    @Test
-    public void testExpressionWithRepeteadVar() {
-        interpreter.interpret("let a:number = 2; print(a*a*a);");
-    }
-
-    @Test
-    public void testPrecedenceInExpressions() {
-        interpreter.interpret("let a:number = 2; let b:number = 3; let c:number = 1; print(a*b-c);");
+    public void test008() {
+        interpreter.interpret("print(2);");
     }
 }

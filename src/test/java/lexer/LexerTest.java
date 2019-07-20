@@ -102,6 +102,16 @@ public class LexerTest {
     }
 
     @Test
+    public void test011_Parenthesis() {
+        Token expected1 = new TokenImpl(TokenType.PRINT, 0, 0, 0,"print");
+        Token expected2 = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0,"(");
+        Token actual1 = lexer.lex("print(").get(0);
+        Token actual2 = lexer.lex("print(").get(1);
+        assertEquals(expected1, actual2);
+        assertEquals(expected2, actual2);
+    }
+
+    @Test
     public void test015_IdentifiersWithOperation() {
         Token firsExpected = new TokenImpl(TokenType.IDENTIFIER, 0, 0, 0,"a");
         Token secondExpected = new TokenImpl(TokenType.SPACE, 1, 1, 0," ");
