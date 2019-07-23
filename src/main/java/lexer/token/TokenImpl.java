@@ -46,11 +46,10 @@ public class TokenImpl implements Token {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TokenImpl token = (TokenImpl) o;
-        return true;
-//                tokenType == token.tokenType;
+        return tokenType == token.tokenType
 //                && fromColumn == token.fromColumn
 //                && line == token.line
-//                && value.equals(token.value);
+                && value.equals(token.value);
     }
 
     @Override

@@ -22,7 +22,7 @@ class StringLiteralState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return openedString && context.getC() == DOUBLE_QUOTE;
+        return openedString && context.getCurrentCharacter() == DOUBLE_QUOTE;
     }
 
     @Override
@@ -38,6 +38,6 @@ class StringLiteralState extends LexerState {
     @Override
     Token generateToken(LexerAutomaton context) {
         return new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn() + 1, context.getLine(),
-                context.getLexeme().substring(1));
+                context.getLexeme().substring(1, context.getLexeme().length() - 1));
     }
 }

@@ -3,6 +3,7 @@ package lexer.state;
 import lexer.token.TokenType;
 
 import static common.Constants.NUMBER;
+import static common.Constants.NUMBERS;
 
 class NumberLiteralState extends LexerState {
 
@@ -13,7 +14,7 @@ class NumberLiteralState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return context.getC().toString().matches(NUMBER);
+        return context.getCurrentCharacter().toString().matches(NUMBERS);
     }
 
     @Override

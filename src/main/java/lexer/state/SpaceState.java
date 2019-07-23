@@ -13,7 +13,7 @@ class SpaceState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return context.getC() == SPACE;
+        return context.getCurrentCharacter() == SPACE;
     }
 
     @Override
@@ -23,8 +23,9 @@ class SpaceState extends LexerState {
 
     @Override
     TokenType getTokenType(LexerAutomaton context) {
+        // removes previous Space Token so that it returns only one Space Token
         if (!context.getOutput().isEmpty())
-            if (context.getOutput().get(context.getOutput().size()).tokenType().equals(TokenType.SPACE))
+            if (context.getOutput().get(context.getOutput().size() - 1).tokenType().equals(TokenType.SPACE))
                 context.getOutput().remove(context.getOutput().size());
         return TokenType.SPACE;
     }

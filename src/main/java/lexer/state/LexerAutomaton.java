@@ -8,6 +8,7 @@ import java.util.List;
 
 public class LexerAutomaton implements Lexer {
 
+    private static final Character ESCAPE_CHARACTER = '$';
     private LexerState current;
     private String lexeme;
     private int line = 0;
@@ -15,14 +16,15 @@ public class LexerAutomaton implements Lexer {
     private int toColumn;
     private List<Token> output = new ArrayList<>();
     private Character c;
+    private int i;
 
     @Override
     public List<Token> lex(String input) {
         current = LexerState.getFirstState();
         lexeme = "";
-
-        int i = 0;
+        i = 0;
         c = input.charAt(i);
+
         while (i < input.length()) {
             fromColumn = i;
 
@@ -35,23 +37,17 @@ public class LexerAutomaton implements Lexer {
                 c = input.charAt(i);
             }
 
-            // State does not accept input:
-
-            // 1. Because it is a token
             if (current.isValidToken(this)) {
                 output.add(current.generateToken(this));
                 lexeme = "";
-                i++;
             }
 
-            // 2. Because it is not a token
-            else
-                current = current.next();
+            current = current.next();
         }
         return output;
     }
 
-    public void setState(LexerState state) {
+    void setState(LexerState state) {
         current = state;
     }
 
@@ -59,7 +55,7 @@ public class LexerAutomaton implements Lexer {
         return line;
     }
 
-    public void setLine(int line) {
+    void setLine(int line) {
         this.line = line;
     }
 
@@ -67,7 +63,7 @@ public class LexerAutomaton implements Lexer {
         return fromColumn;
     }
 
-    public void setFromColumn(int fromColumn) {
+    void setFromColumn(int fromColumn) {
         this.fromColumn = fromColumn;
     }
 
@@ -75,7 +71,7 @@ public class LexerAutomaton implements Lexer {
         return toColumn;
     }
 
-    public void setToColumn(int toColumn) {
+    void setToColumn(int toColumn) {
         this.toColumn = toColumn;
     }
 
@@ -91,15 +87,20 @@ public class LexerAutomaton implements Lexer {
         return output;
     }
 
-    public void setOutput(List<Token> output) {
+    void setOutput(List<Token> output) {
         this.output = output;
     }
 
-    public Character getC() {
-        return c;
+    int getI() {
+        return i;
     }
 
-    public void setC(Character c) {
-        this.c = c;
+    void setI(int i) {
+        this.i = i;
+    }
+
+    Character getCurrentCharacter() {
+        if (lexeme.isEmpty()) return ESCAPE_CHARACTER;
+        return lexeme.charAt(lexeme.length() - 1);
     }
 }
