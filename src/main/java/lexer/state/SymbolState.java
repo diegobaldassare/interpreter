@@ -11,6 +11,7 @@ class SymbolState extends LexerState {
 
     private static SymbolState theInstance;
     private final Map<Character, TokenType> symbols;
+    private boolean readingSymbol; //fixes when more than one symbol is read all together
 
     // Singleton
     private SymbolState() {
@@ -33,12 +34,20 @@ class SymbolState extends LexerState {
 
     @Override
     boolean accepts(Character c) {
-        return symbols.containsKey(c);
+        if (symbols.containsKey(c) && !readingSymbol) {
+            readingSymbol = true;
+            return true;
+        }
+        return false;
     }
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return symbols.containsKey(context.getCurrentCharacter());
+        if (symbols.containsKey(context.getCurrentCharacter())) {
+            readingSymbol = false;
+            return true;
+        }
+        return false;
     }
 
     @Override

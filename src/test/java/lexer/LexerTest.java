@@ -112,7 +112,7 @@ public class LexerTest {
     }
 
     @Test
-    public void test015_IdentifiersWithOperation() {
+    public void test012_IdentifiersWithOperation() {
         Token firstExpected = new TokenImpl(TokenType.IDENTIFIER, 0, 0, 0,"a");
         Token secondExpected = new TokenImpl(TokenType.SPACE, 1, 1, 0," ");
         Token thirdExpected = new TokenImpl(TokenType.PLUS_SYMBOL, 2, 2, 0,"+");
@@ -125,7 +125,7 @@ public class LexerTest {
     }
 
     @Test
-    public void test016_AssignationWithType() {
+    public void test013_AssignationWithType() {
         Token firstExpected = new TokenImpl(TokenType.LET, 0, 2, 0,"let");
         Token secondExpected = new TokenImpl(TokenType.SPACE, 3, 3, 0," ");
         Token thirdExpected = new TokenImpl(TokenType.IDENTIFIER, 4, 6, 0,"foo");
@@ -145,7 +145,7 @@ public class LexerTest {
     }
 
     @Test
-    public void test017_PrintFunctionWithExpression() {
+    public void test014_PrintFunctionWithExpression() {
         Token firstExpected = new TokenImpl(TokenType.PRINT, 0, 0, 0,"print");
         Token secondExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0,"(");
         Token thirdExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0,"4");
@@ -160,14 +160,14 @@ public class LexerTest {
     }
 
     @Test
-    public void test018_MultipleSpaces() {
+    public void test015_MultipleSpaces() {
         Token expected = new TokenImpl(TokenType.SPACE, 0, 2, 0,"   ");
         Token actual = lexer.lex("   ").get(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void test020_LexerException() {
+    public void test016_LexerException() {
         try {
             lexer.lex("print((2);");
         } catch (LexerException e) {
@@ -176,7 +176,7 @@ public class LexerTest {
     }
 
     @Test
-    public void test021_LexerException() {
+    public void test017_LexerException() {
         try {
             lexer.lex("print();");
         } catch (LexerException e) {

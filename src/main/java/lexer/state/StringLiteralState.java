@@ -37,7 +37,6 @@ class StringLiteralState extends LexerState {
 
     @Override
     Token generateToken(LexerAutomaton context) {
-        System.out.println(context.getLexeme());
         return new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn() + 1, context.getLine(),
                 context.getLexeme().substring(1, context.getLexeme().length() - 1));
     }
