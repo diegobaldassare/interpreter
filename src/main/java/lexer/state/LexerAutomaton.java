@@ -103,4 +103,8 @@ public class LexerAutomaton implements Lexer {
         if (lexeme.isEmpty()) return ESCAPE_CHARACTER;
         return lexeme.charAt(lexeme.length() - 1);
     }
+
+    Character getC() {
+        return c;
+    }
 }

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static common.Constants.ALPHANUMERIC;
+import static common.Constants.DOUBLE_QUOTE;
+import static common.Constants.NUMBERS;
 
 class AlphanumericState extends LexerState {
 
@@ -33,11 +35,7 @@ class AlphanumericState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        for (String s : keywords.keySet()) {
-            if (s.equals(context.getLexeme()))
-                return true;
-        }
-        return false;
+        return context.getCurrentCharacter().toString().matches(ALPHANUMERIC) && !context.getC().equals(DOUBLE_QUOTE);
     }
 
     @Override
