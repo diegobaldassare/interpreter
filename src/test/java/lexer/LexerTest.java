@@ -30,7 +30,7 @@ public class LexerTest {
 
     @Test
     public void test002_NumberLiteral() {
-        Token expected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 3, 0,"123");
+        Token expected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 2, 0,"123");
         Token actual = lexer.lex("123").get(0);
         assertEquals(expected, actual);
     }
@@ -103,8 +103,8 @@ public class LexerTest {
 
     @Test
     public void test011_Parenthesis() {
-        Token expected1 = new TokenImpl(TokenType.PRINT, 0, 0, 0,"print");
-        Token expected2 = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0,"(");
+        Token expected1 = new TokenImpl(TokenType.PRINT, 0, 4, 0,"print");
+        Token expected2 = new TokenImpl(TokenType.LEFT_PARENTHESIS, 5, 5, 0,"(");
 
         List<Token> expected = Arrays.asList(expected1, expected2);
         List<Token> actual = lexer.lex("print(");
@@ -146,13 +146,13 @@ public class LexerTest {
 
     @Test
     public void test014_PrintFunctionWithExpression() {
-        Token firstExpected = new TokenImpl(TokenType.PRINT, 0, 0, 0,"print");
-        Token secondExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0,"(");
-        Token thirdExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0,"4");
-        Token fourthExpected = new TokenImpl(TokenType.FORWARD_SLASH, 0, 0, 0,"/");
-        Token fifthExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0,"2");
-        Token sixthExpected = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 0, 0, 0,")");
-        Token seventhExpected = new TokenImpl(TokenType.SEMICOLON, 0, 0, 0,";");
+        Token firstExpected = new TokenImpl(TokenType.PRINT, 0, 4, 0,"print");
+        Token secondExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 5, 5, 0,"(");
+        Token thirdExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 6, 6, 0,"4");
+        Token fourthExpected = new TokenImpl(TokenType.FORWARD_SLASH, 7, 7, 0,"/");
+        Token fifthExpected = new TokenImpl(TokenType.NUMBER_LITERAL, 8, 8, 0,"2");
+        Token sixthExpected = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 9, 9, 0,")");
+        Token seventhExpected = new TokenImpl(TokenType.SEMICOLON, 10, 10, 0,";");
 
         List<Token> expected = Arrays.asList(firstExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected, sixthExpected, seventhExpected);
         List<Token> actual = lexer.lex("print(4/2);");
@@ -162,25 +162,85 @@ public class LexerTest {
     @Test
     public void test015_MultipleSpaces() {
         Token expected = new TokenImpl(TokenType.SPACE, 0, 2, 0,"   ");
-        Token actual = lexer.lex("   ").get(0);
+
+        List<Token> actual = lexer.lex("   ");
+        assertEquals(expected, actual.get(0));
+        assertEquals(1, actual.size());
+    }
+
+    @Test
+    public void test016_MultipleSymbols() {
+        Token firstExpected = new TokenImpl(TokenType.PRINT, 0, 4, 0,"print");
+        Token secondExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 5, 5, 0,"(");
+        Token thirdExpected = new TokenImpl(TokenType.LEFT_PARENTHESIS, 6, 6, 0,"(");
+        Token fourthExpected = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 7, 7, 0,")");
+        Token fifthExpected = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 8, 8, 0,")");
+        Token sixthExpected = new TokenImpl(TokenType.SEMICOLON, 9, 9, 0,";");
+
+        List<Token> expected = Arrays.asList(firstExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected, sixthExpected);
+        List<Token> actual = lexer.lex("print(());");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void test016_LexerException() {
-        try {
-            lexer.lex("print((2);");
-        } catch (LexerException e) {
-            System.out.println(e.getMessage());
-        }
+    public void test017_MultipleStrings() {
+        Token firstExpected = new TokenImpl(TokenType.STRING_LITERAL, 0, 1, 0,"te");
+        Token secondExpected = new TokenImpl(TokenType.SPACE, 2, 2, 0," ");
+        Token thirdExpected = new TokenImpl(TokenType.PLUS_SYMBOL, 3, 3, 0,"+");
+        Token fourthExpected = new TokenImpl(TokenType.SPACE, 4, 7, 4," ");
+        Token fifthExpected = new TokenImpl(TokenType.STRING_LITERAL, 5, 6, 0,"st");
+
+        List<Token> expected = Arrays.asList(firstExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected);
+        List<Token> actual = lexer.lex("\"te\" + \"st\"");
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void test017_LexerException() {
+    public void test018_MultipleLines() {
+        Token expected1 = new TokenImpl(TokenType.LET, 0, 2, 0,"let");
+        Token expected2 = new TokenImpl(TokenType.SPACE, 3, 3, 0," ");
+        Token expected3 = new TokenImpl(TokenType.IDENTIFIER, 4, 12, 0,"variable1");
+        Token expected4 = new TokenImpl(TokenType.COLON, 13, 13, 0,":");
+        Token expected5 = new TokenImpl(TokenType.SPACE, 14, 14, 0," ");
+        Token expected6 = new TokenImpl(TokenType.NUMBER_TYPE, 15, 20, 0,"number");
+        Token expected7 = new TokenImpl(TokenType.SEMICOLON, 21, 21, 0,";");
+
+        Token expected8 = new TokenImpl(TokenType.IDENTIFIER, 0, 8, 1,"variable1");
+        Token expected9 = new TokenImpl(TokenType.SPACE, 9, 9, 1," ");
+        Token expected10 = new TokenImpl(TokenType.EQUALS, 10, 10, 1,"=");
+        Token expected11 = new TokenImpl(TokenType.SPACE, 11, 11, 1," ");
+        Token expected12 = new TokenImpl(TokenType.NUMBER_LITERAL, 12, 12, 1,"4");
+        Token expected13 = new TokenImpl(TokenType.FORWARD_SLASH, 13, 13, 1,"/");
+        Token expected14 = new TokenImpl(TokenType.LEFT_PARENTHESIS, 14, 14, 1,"(");
+        Token expected15 = new TokenImpl(TokenType.NUMBER_LITERAL, 15, 15, 1,"3");
+        Token expected16 = new TokenImpl(TokenType.SLASH, 16, 16, 1,"-");
+        Token expected17 = new TokenImpl(TokenType.NUMBER_LITERAL, 17, 17, 1,"1");
+        Token expected18 = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 18, 18, 1,")");
+        Token expected19 = new TokenImpl(TokenType.SEMICOLON, 19, 19, 1,";");
+
+        Token expected20 = new TokenImpl(TokenType.PRINT, 0, 4, 2,"print");
+        Token expected21 = new TokenImpl(TokenType.LEFT_PARENTHESIS, 5, 5, 2,"(");
+        Token expected22 = new TokenImpl(TokenType.IDENTIFIER, 6, 14, 2,"variable1");
+        Token expected23 = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 15, 15, 2,")");
+        Token expected24 = new TokenImpl(TokenType.SEMICOLON, 16, 16, 2,";");
+
+        List<Token> expected = Arrays.asList(expected1, expected2, expected3, expected4, expected5, expected6, expected7,
+                expected8, expected9, expected10, expected11, expected12, expected13, expected14, expected15, expected16,
+                expected17, expected18, expected19, expected20, expected21, expected22, expected23, expected24);
+
+        List<Token> actual = lexer.lex(
+                "let variable1: number;" +
+                        "variable1 = 4/(3-1);" +
+                        "print(variable1);");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test020_LexerException() {
         try {
-            lexer.lex("print();");
+            lexer.lex("2variable");
         } catch (LexerException e) {
-            System.out.println(e.getMessage());
+            assertEquals("line: 0 and column: 0", e.getMessage());
         }
     }
 }

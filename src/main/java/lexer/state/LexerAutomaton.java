@@ -6,31 +6,42 @@ import lexer.token.Token;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the "context" of the State Pattern.
+ * It has all the information corresponding to the input
+ * while reading it, with its corresponding getters and setters,
+ * so that each state can respond according to the context.
+ */
 public class LexerAutomaton implements Lexer {
 
     private static final Character ESCAPE_CHARACTER = '$';
     private LexerState current;
     private String lexeme;
-    private int line = 0;
+    private int line;
     private int fromColumn;
     private int toColumn;
     private List<Token> output = new ArrayList<>();
     private Character c;
     private int i;
+    private int pastLines;
+    private int lineStart;
 
     @Override
     public List<Token> lex(String input) {
         current = LexerState.getFirstState();
         lexeme = "";
+        line = 0;
+        fromColumn = 0;
+        pastLines = 0;
+
         i = 0;
         c = input.charAt(i);
 
         while (i < input.length()) {
-            fromColumn = i;
 
             // State accepts input
             while (current.accepts(c)) {
-                toColumn = i;
+                toColumn = i - pastLines;
                 lexeme = lexeme.concat(c.toString());
                 i++;
                 if (i >= input.length()) break;
@@ -40,6 +51,7 @@ public class LexerAutomaton implements Lexer {
             if (current.isValidToken(this)) {
                 output.add(current.generateToken(this));
                 lexeme = "";
+                fromColumn = i - pastLines;
             }
 
             current = current.next();
@@ -106,5 +118,21 @@ public class LexerAutomaton implements Lexer {
 
     Character getC() {
         return c;
+    }
+
+    int getPastLines() {
+        return pastLines;
+    }
+
+    void setPastLines(int pastLines) {
+        this.pastLines = pastLines;
+    }
+
+    int getLineStart() {
+        return lineStart;
+    }
+
+    void setLineStart(int lineStart) {
+        this.lineStart = lineStart;
     }
 }

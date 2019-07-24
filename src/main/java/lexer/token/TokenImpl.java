@@ -47,8 +47,9 @@ public class TokenImpl implements Token {
         if (o == null || getClass() != o.getClass()) return false;
         TokenImpl token = (TokenImpl) o;
         return tokenType == token.tokenType
-//                && fromColumn == token.fromColumn
-//                && line == token.line
+                && fromColumn == token.fromColumn
+                && toColumn == token.toColumn
+                && line == token.line
                 && value.equals(token.value);
     }
 

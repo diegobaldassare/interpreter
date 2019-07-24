@@ -1,11 +1,15 @@
 package lexer.state;
 
+import lexer.token.Token;
+import lexer.token.TokenImpl;
 import lexer.token.TokenType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static lexer.token.TokenType.SEMICOLON;
 
 class SymbolState extends LexerState {
 
@@ -28,7 +32,7 @@ class SymbolState extends LexerState {
         result.put('/', TokenType.FORWARD_SLASH);
         result.put('=', TokenType.EQUALS);
         result.put(':', TokenType.COLON);
-        result.put(';', TokenType.SEMICOLON);
+        result.put(';', SEMICOLON);
         return result;
     }
 
@@ -58,6 +62,18 @@ class SymbolState extends LexerState {
     @Override
     TokenType getTokenType(LexerAutomaton context) {
         return symbols.get(context.getCurrentCharacter());
+    }
+
+    @Override
+    Token generateToken(LexerAutomaton context) {
+        Token result = new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn(), context.getLine(), context.getLexeme());
+        if (context.getCurrentCharacter().equals(';')) {
+            context.setLine(context.getLine() + 1);
+            context.setFromColumn(0);
+            context.setPastLines(context.getPastLines() + context.getI() - context.getLineStart());
+            context.setLineStart(context.getI());
+        }
+        return result;
     }
 
     static SymbolState getInstance() {
