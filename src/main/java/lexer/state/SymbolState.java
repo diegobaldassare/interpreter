@@ -70,6 +70,7 @@ class SymbolState extends LexerState {
         if (context.getCurrentCharacter().equals(';')) {
             context.setLine(context.getLine() + 1);
             context.setFromColumn(0);
+            context.setStringLiterals(0);
             context.setPastLines(context.getPastLines() + context.getI() - context.getLineStart());
             context.setLineStart(context.getI());
         }

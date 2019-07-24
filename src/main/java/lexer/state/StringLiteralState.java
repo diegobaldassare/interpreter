@@ -15,14 +15,13 @@ class StringLiteralState extends LexerState {
         if (c.equals(DOUBLE_QUOTE)) {
             if (openedString) return false;
             openedString = true;
-            return true;
         }
         return openedString;
     }
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return openedString && context.getCurrentCharacter() == DOUBLE_QUOTE;
+        return openedString && context.getC() == DOUBLE_QUOTE;
     }
 
     @Override
@@ -37,7 +36,11 @@ class StringLiteralState extends LexerState {
 
     @Override
     Token generateToken(LexerAutomaton context) {
-        return new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn(), context.getLine(),
-                context.getLexeme().substring(1, context.getLexeme().length() - 1));
+        openedString = false;
+        context.setStringLiterals(context.getStringLiterals() + 1);
+        context.setI(context.getI() + 1);
+        if (context.getI() < context.getInput().length()) context.setC(context.getInput().charAt(context.getI()));
+        return new TokenImpl(getTokenType(context), context.getFromColumn(), context.getToColumn() - 1,
+                context.getLine(), context.getLexeme().substring(1));
     }
 }

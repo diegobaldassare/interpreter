@@ -57,7 +57,7 @@ public class TokenImpl implements Token {
     public String toString() {
         return "TokenImpl{" +
                 "tokenType=" + tokenType +
-                ", value='" + value +
+                ", value=" + value +
                 ", line=" + line +
                 ", fromColumn=" + fromColumn +
                 ", toColumn=" + toColumn +
