@@ -235,13 +235,4 @@ public class LexerTest {
                         "print(variable1);");
         assertEquals(expected, actual);
     }
-
-    @Test
-    public void test020_LexerException() {
-        try {
-            lexer.lex("2variable");
-        } catch (LexerException e) {
-            assertEquals("line: 0 and column: 0", e.getMessage());
-        }
-    }
 }
