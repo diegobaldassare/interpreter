@@ -1,7 +1,7 @@
 package interpreter.interpreter;
 
 
-import interpreter.ast.ASTNode;
+import interpreter.node.ASTNode;
 
 public interface Interpreter {
 

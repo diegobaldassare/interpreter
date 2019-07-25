@@ -1,6 +1,6 @@
 package interpreter.parser.rules;
 
-import interpreter.ast.ASTNode;
+import interpreter.node.ASTNode;
 import interpreter.token.Token;
 
 import java.util.List;

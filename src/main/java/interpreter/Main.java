@@ -1,6 +1,6 @@
 package interpreter;
 
-import interpreter.ast.ASTNode;
+import interpreter.node.ASTNode;
 import interpreter.interpreter.Interpreter;
 import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
