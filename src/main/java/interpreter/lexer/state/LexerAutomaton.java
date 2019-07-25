@@ -15,7 +15,7 @@ import java.util.List;
 public class LexerAutomaton implements Lexer {
 
     private static final Character ESCAPE_CHARACTER = '$';
-    private LexerState current;
+    private LexerState currentState;
     private String lexeme;
     private int line = 0;
     private int fromColumn;
@@ -31,7 +31,7 @@ public class LexerAutomaton implements Lexer {
 
     @Override
     public List<Token> lex(String input) {
-        current = LexerState.getFirstState();
+        currentState = LexerState.getFirstState();
         lexeme = "";
         this.input = input;
 
@@ -41,7 +41,7 @@ public class LexerAutomaton implements Lexer {
         while (i < input.length()) {
 
             // State accepts input
-            while (current.accepts(c)) {
+            while (currentState.accepts(c)) {
                 toColumn = i - pastLines - stringLiterals * 2;
                 lexeme = lexeme.concat(c.toString());
                 i++;
@@ -49,19 +49,19 @@ public class LexerAutomaton implements Lexer {
                 c = input.charAt(i);
             }
 
-            if (current.isValidToken(this)) {
-                output.add(current.generateToken(this));
+            if (currentState.isValidToken(this)) {
+                output.add(currentState.generateToken(this));
                 lexeme = "";
                 fromColumn = i - pastLines - stringLiterals * 2;
             }
 
-            current = current.next();
+            currentState = currentState.next();
         }
         return output;
     }
 
     void setState(LexerState state) {
-        current = state;
+        currentState = state;
     }
 
     public int getLine() {
