@@ -46,7 +46,7 @@ public class NumberValue extends Value {
 
     @Override
     Value subtract(NumberValue value) {
-        return new NumberValue(this.value - value.value);
+        return new NumberValue(value.value - this.value);
     }
 
     @Override
@@ -66,10 +66,10 @@ public class NumberValue extends Value {
 
     @Override
     Value divide(NumberValue value) {
-        if (value.value == 0) {
+        if (this.value == 0) {
             throw new ArithmeticException("Can not divide by zero");
         }
-        return new NumberValue(this.value / value.value);
+        return new NumberValue(value.value / this.value);
     }
 
     @Override

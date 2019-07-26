@@ -63,7 +63,10 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
         verifyDeclarationAndAssignationTypes(
                 node.getExpression().value().getDataType(),
                 memory.findById(node.getIdentifier()).get().getDataType(), node.getIdentifier());
-        memory.findById(node.getIdentifier()).ifPresent(v -> v.setValue(node.getExpression().value()));
+
+        Value result = node.getExpression().value();
+
+        memory.findById(node.getIdentifier()).ifPresent(v -> v.setValue(result));
     }
 
     @Override

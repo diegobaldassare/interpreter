@@ -81,7 +81,7 @@ public class InterpreterTest {
     }
 
     @Test
-    public void test007_should_assign_an_expression() {
+    public void test007_should_calculate_a_subtraction() {
         Memory<String, Value> expected = new MemoryImpl();
         expected.saveOrUpdate("var7", new NumberValue(9));
         interpreter.interpret("let var7: number = 2 * 5 - 1;");
@@ -89,10 +89,29 @@ public class InterpreterTest {
     }
 
     @Test
-    public void test007_should_use_the_value_of_a_variable() {
+    public void test008_should_calculate_a_division() {
         Memory<String, Value> expected = new MemoryImpl();
-        expected.saveOrUpdate("variable1", new NumberValue(5));
-        interpreter.interpret("variable1 = 5;");
+        expected.saveOrUpdate("var7", new NumberValue(0));
+        interpreter.interpret("let var7: number = 0 / 2;");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test009_should_calculate_an_expression() {
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("var7", new NumberValue(10));
+        interpreter.interpret("let var7: number = 5 + 4 / 2 * 3 - 1;");
+        assertEquals(expected, actualMemory);
+    }
+
+
+    @Test
+    public void test010_should_use_the_value_of_a_variable() {
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("a", new NumberValue(2));
+        expected.saveOrUpdate("b", new NumberValue(4));
+        interpreter.interpret("let a: number = 2;");
+        interpreter.interpret("let b: number = a + 2;");
         assertEquals(expected, actualMemory);
     }
 
