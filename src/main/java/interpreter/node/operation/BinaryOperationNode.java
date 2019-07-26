@@ -13,6 +13,11 @@ public abstract class BinaryOperationNode extends ExpressionNode {
         this.right = right;
     }
 
+    BinaryOperationNode(ExpressionNode left, ExpressionNode right) {
+        this.left = left;
+        this.right = right;
+    }
+
     @Override
     public String value() {
         return calculateValue(left, right);
@@ -27,5 +32,13 @@ public abstract class BinaryOperationNode extends ExpressionNode {
         BinaryOperationNode node = (BinaryOperationNode) o;
         return left.equals(node.left) &&
                 right.equals(node.right);
+    }
+
+    @Override
+    public String toString() {
+        return "BinaryOperationNode{" +
+                "left=" + left +
+                ", right=" + right +
+                '}';
     }
 }

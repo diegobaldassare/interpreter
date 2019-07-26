@@ -8,6 +8,10 @@ public class DivisionNode extends BinaryOperationNode {
         super(line, fromColumn, toColumn, left, right);
     }
 
+    public DivisionNode(ExpressionNode left, ExpressionNode right) {
+        super(left, right);
+    }
+
     @Override
     String calculateValue(ExpressionNode left, ExpressionNode right) {
         return left.value() + right.value();

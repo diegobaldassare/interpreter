@@ -3,6 +3,7 @@ package interpreter.parser;
 import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
 import interpreter.node.*;
+import interpreter.node.operation.AdditionNode;
 import interpreter.node.value.NumberValue;
 import interpreter.node.value.StringValue;
 import org.junit.Before;
@@ -42,6 +43,14 @@ public class ParserTest {
         ASTProgram expected = new ASTProgram();
         expected.getStatements().add(new PrintNode(new StringValue("test")));
         AST actual = parser.parse(lexer.lex("print(\"test\");"));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test004_PrintWithAdditionNode() {
+        ASTProgram expected = new ASTProgram();
+        expected.getStatements().add(new PrintNode(new AdditionNode(new NumberValue(2), new NumberValue(2))));
+        AST actual = parser.parse(lexer.lex("print(2 + 2)"));
         assertEquals(expected, actual);
     }
 }

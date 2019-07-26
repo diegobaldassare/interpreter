@@ -2,11 +2,11 @@ package interpreter.node;
 
 public abstract class ExpressionNode extends ASTNode {
 
-    public ExpressionNode(int line, int fromColumn, int toColumn) {
+    protected ExpressionNode(int line, int fromColumn, int toColumn) {
         super(line, fromColumn, toColumn);
     }
 
-    public ExpressionNode() {
+    protected ExpressionNode() {
     }
 
     @Override

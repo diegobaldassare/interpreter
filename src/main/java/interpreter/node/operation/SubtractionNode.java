@@ -8,6 +8,10 @@ public class SubtractionNode extends BinaryOperationNode {
         super(line, fromColumn, toColumn, left, right);
     }
 
+    public SubtractionNode(ExpressionNode left, ExpressionNode right) {
+        super(left, right);
+    }
+
     @Override
     String calculateValue(ExpressionNode left, ExpressionNode right) {
         return left.value() + right.value();
