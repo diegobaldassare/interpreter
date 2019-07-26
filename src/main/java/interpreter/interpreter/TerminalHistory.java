@@ -1,11 +1,11 @@
 package interpreter.interpreter;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TerminalHistory implements Terminal {
 
-    private Queue<String> history = new PriorityQueue<>();
+    private List<String> history = new ArrayList<>();
 
     @Override
     public void print(String output) {
