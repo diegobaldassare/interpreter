@@ -32,14 +32,14 @@ public class InterpreterTest {
         assertEquals(expected, actualMemory);
     }
 
-//    @Test
-//    public void test002_should_assign_an_expression_to_a_variable() {
-//        test001_should_declare_a_variable();
-//        Memory<String, Value> expected = new MemoryImpl();
-//        expected.saveOrUpdate("variable1", new NumberValue(9));
-//        interpreter.interpret("variable1 = 2 * 5 - 1;");
-//        assertEquals(expected, actualMemory);
-//    }
+    @Test
+    public void test002_should_assign_an_expression_to_a_variable() {
+        test001_should_declare_a_variable();
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable1", new NumberValue(9));
+        interpreter.interpret("variable1 = 2 * 5 - 1;");
+        assertEquals(expected, actualMemory);
+    }
 //
 //    @Test
 //    public void test003_should_print_a_value() {

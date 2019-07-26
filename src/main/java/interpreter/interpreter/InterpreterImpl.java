@@ -5,8 +5,6 @@ import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
 import interpreter.node.*;
 import interpreter.node.operation.BinaryOperationNode;
-import interpreter.node.value.NumberValue;
-import interpreter.node.value.StringValue;
 import interpreter.node.value.Value;
 import interpreter.parser.Parser;
 import interpreter.parser.ParserImpl;
@@ -55,26 +53,15 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitDeclaration(DeclarationNode node) {
-        if (memory.findById(node.getIdentifier()).isPresent())
-            throw new InterpreterException("identifier was already decalred. Can not declare it again at line " +
-                    node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
-
-        memory.saveOrUpdate(node.getIdentifier(), Value.generateEmptyValue(node.getDataType()));
+        verifyDeclaration(node.getIdentifier());
+        memory.saveOrUpdate(node.getIdentifier(), Value.emptyValue(node.getDataType()));
     }
 
     @Override
     public void visitAssignation(AssignationNode node) {
-        //verify existence
-        if (!memory.findById(node.getIdentifier()).isPresent())
-            throw new InterpreterException("identifier was never decalred. Can not assign it at line " +
-                    node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
-
-        //verify data types
-        if (!memory.findById(node.getIdentifier()).get().getDataType().equals(node.getExpression().value().getDataType()))
-            throw new InterpreterException("identifier has a different data type to the result expression at line " +
-                    node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
-
-        memory.findById(node.getIdentifier()).get().setValue(node.getExpression().value());
+        verifyAssignation(node.getIdentifier());
+//        verifyDeclarationAndAssignationTypes(node.getExpression().value().getDataType(), , node.getIdentifier());
+        memory.findById(node.getIdentifier()).ifPresent(v -> v.setValue(node.getExpression().value()));
     }
 
     @Override
@@ -84,16 +71,9 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitDeclarationAndAssignation(DeclarationAndAssignationNode node) {
-        if (memory.findById(node.getIdentifier()).isPresent())
-            throw new InterpreterException("identifier was already decalred. Can not declare it again at line " +
-                    node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
-
-        memory.saveOrUpdate(node.getIdentifier(), node.getExpression().value());
-    }
-
-    @Override
-    public void visitExpression(ExpressionNode node) {
-
+        verifyDeclaration(node.getIdentifier());
+//        verifyDeclarationAndAssignationTypes(node.getDataType());
+//        memory.saveOrUpdate(node.getIdentifier(), node.getExpression().value());
     }
 
     @Override
@@ -103,16 +83,26 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitIdentifier(IdentifierNode node) {
-
+        verifyDeclaration(node.getIdentifier());
+        memory.findById(node.getIdentifier()).ifPresent(node::setValue);
     }
 
-    @Override
-    public void visitNumber(NumberValue node) {
-
+    private void verifyDeclaration(String identifier) {
+        if (memory.findById(identifier).isPresent()) {
+            throw new InterpreterException("identifier \'" + identifier + "\' is already declared");
+        }
     }
 
-    @Override
-    public void visitString(StringValue node) {
+    private void verifyAssignation(String identifier) {
+        if (memory.findById(identifier).isPresent()) {
+            throw new InterpreterException("identifier \'" + identifier + "\' is not declared");
+        }
+    }
 
+    private void verifyDeclarationAndAssignationTypes(Value value, String type, String id) {
+//        if (!value.getDataType(type)) {
+//            throw new TypeMismatchException(String.format("%s is not of type %s", id, type));
+//            throw new InterpreterException("identifier \'" + identifier + "\' is not declared");
+//        }
     }
 }

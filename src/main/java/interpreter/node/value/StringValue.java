@@ -1,16 +1,10 @@
 package interpreter.node.value;
 
 import interpreter.interpreter.InterpreterException;
-import interpreter.interpreter.visitor.ASTVisitor;
 
 public class StringValue extends Value {
 
     private String value;
-
-    public StringValue(int line, int fromColumn, int toColumn, String value) {
-        super(line, fromColumn, toColumn, DataType.STRING_TYPE);
-        this.value = value;
-    }
 
     public StringValue(String value) {
         super(DataType.STRING_TYPE);
@@ -22,13 +16,10 @@ public class StringValue extends Value {
     }
 
     @Override
-    public void accept(ASTVisitor visitor) {
-
-    }
-
-    @Override
-    public Value value() {
-        return this;
+    public void setValue(Value newValue) {
+        if (newValue.getDataType() != getDataType())
+            throw new InterpreterException("the value has a different data type to the result expression");
+        this.value = newValue.toString();
     }
 
     @Override
@@ -42,13 +33,5 @@ public class StringValue extends Value {
     @Override
     public String toString() {
         return value;
-    }
-
-    @Override
-    public void setValue(Value newValue) {
-        if (newValue.getDataType() != getDataType())
-            throw new InterpreterException("the value has a different data type to the result expression at line " +
-                    getLine() + ", between column " + getFromColumn() + " and " + getToColumn() + ".");
-        this.value = newValue.toString();
     }
 }

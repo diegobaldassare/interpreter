@@ -17,11 +17,12 @@ public class AdditionNode extends BinaryOperationNode {
 
     @Override
     Value calculateValue(ExpressionNode left, ExpressionNode right) {
-        return new NumberValue(0);
+//        return left.value().a.add(right.value());
+        return new NumberValue();
     }
 
     @Override
     public void accept(ASTVisitor visitor) {
-
+//        visitor.visitAddition(visitor);
     }
 }

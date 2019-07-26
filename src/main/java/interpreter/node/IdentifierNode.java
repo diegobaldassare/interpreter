@@ -6,6 +6,7 @@ import interpreter.node.value.Value;
 public class IdentifierNode extends ExpressionNode {
 
     private String identifier;
+    private Value value;
 
     public IdentifierNode(int line, int fromColumn, int toColumn, String identifier) {
         super(line, fromColumn, toColumn);
@@ -23,7 +24,15 @@ public class IdentifierNode extends ExpressionNode {
 
     @Override
     public Value value() {
-        return null;
+        return value;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
     }
 
     @Override

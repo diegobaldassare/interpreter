@@ -2,6 +2,7 @@ package interpreter.parser.rule.handler;
 
 import interpreter.node.ExpressionNode;
 import interpreter.node.IdentifierNode;
+import interpreter.node.LiteralNode;
 import interpreter.node.value.NumberValue;
 import interpreter.node.value.StringValue;
 import interpreter.parser.ParserException;
@@ -23,10 +24,10 @@ public class ValueRule extends ExpressionRule {
         Token t = statement.get(0);
 
         if (t.tokenType().equals(TokenType.STRING_LITERAL))
-            return new StringValue(t.line(), t.fromColumn(), t.toColumn(), t.value());
+            return new LiteralNode(t.line(), t.fromColumn(), t.toColumn(), new StringValue(t.value()));
 
         if (t.tokenType().equals(TokenType.NUMBER_LITERAL))
-            return new NumberValue(t.line(), t.fromColumn(), t.toColumn(), Integer.valueOf(t.value()));
+            return new LiteralNode(t.line(), t.fromColumn(), t.toColumn(), new NumberValue(Integer.valueOf(t.value())));
 
         if (t.tokenType().equals(TokenType.IDENTIFIER))
             return new IdentifierNode(t.line(), t.fromColumn(), t.toColumn(), t.value());
