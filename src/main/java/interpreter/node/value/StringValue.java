@@ -1,5 +1,6 @@
 package interpreter.node.value;
 
+import interpreter.interpreter.InterpreterException;
 import interpreter.interpreter.visitor.ASTVisitor;
 
 public class StringValue extends Value {
@@ -45,6 +46,9 @@ public class StringValue extends Value {
 
     @Override
     public void setValue(Value newValue) {
-
+        if (newValue.getDataType() != getDataType())
+            throw new InterpreterException("the value has a different data type to the result expression at line " +
+                    getLine() + ", between column " + getFromColumn() + " and " + getToColumn() + ".");
+        this.value = newValue.toString();
     }
 }

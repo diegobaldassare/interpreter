@@ -64,16 +64,17 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitAssignation(AssignationNode node) {
+        //verify existence
         if (!memory.findById(node.getIdentifier()).isPresent())
             throw new InterpreterException("identifier was never decalred. Can not assign it at line " +
                     node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
 
+        //verify data types
         if (!memory.findById(node.getIdentifier()).get().getDataType().equals(node.getExpression().value().getDataType()))
             throw new InterpreterException("identifier has a different data type to the result expression at line " +
                     node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
 
-//        memory.findById(node.getIdentifier()).get());
-
+        memory.findById(node.getIdentifier()).get().setValue(node.getExpression().value());
     }
 
     @Override
@@ -83,8 +84,11 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitDeclarationAndAssignation(DeclarationAndAssignationNode node) {
+        if (memory.findById(node.getIdentifier()).isPresent())
+            throw new InterpreterException("identifier was already decalred. Can not declare it again at line " +
+                    node.getLine() + ", between column " + node.getFromColumn() + " and " + node.getToColumn() + ".");
 
-//        memory.saveOrUpdate(node.getIdentifier(), v);
+        memory.saveOrUpdate(node.getIdentifier(), node.getExpression().value());
     }
 
     @Override
