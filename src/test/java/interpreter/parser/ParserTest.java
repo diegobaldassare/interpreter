@@ -70,4 +70,12 @@ public class ParserTest {
         AST actual = parser.parse(lexer.lex("a = a + 1;"));
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void test007_DeclarationAndAssignationNode() {
+        ASTProgram expected = new ASTProgram();
+        expected.getStatements().add(new DeclarationAndAssignationNode("number", "a", new NumberValue(4)));
+        AST actual = parser.parse(lexer.lex("let a: number = 4;"));
+        assertEquals(expected, actual);
+    }
 }
