@@ -235,4 +235,25 @@ public class LexerTest {
                         "print(variable1);");
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void test019_SimpleQuoteStringLiteral() {
+        Token expected = new TokenImpl(TokenType.STRING_LITERAL, 0, 3,0, "test");
+        Token actual = lexer.lex("\'test\'").get(0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test20_MultipleSimpleQuoteStringLiterals() {
+        Token firstExpected = new TokenImpl(TokenType.STRING_LITERAL, 0, 1, 0,"te");
+        Token secondExpected = new TokenImpl(TokenType.SPACE, 2, 2, 0," ");
+        Token thirdExpected = new TokenImpl(TokenType.PLUS_SYMBOL, 3, 3, 0,"+");
+        Token fourthExpected = new TokenImpl(TokenType.SPACE, 4, 4, 0," ");
+        Token fifthExpected = new TokenImpl(TokenType.STRING_LITERAL, 5, 6, 0,"st");
+
+        List<Token> expected = Arrays.asList(firstExpected, secondExpected, thirdExpected, fourthExpected, fifthExpected);
+        List<Token> actual = lexer.lex("\'te\' + \'st\'");
+
+        assertEquals(expected, actual);
+    }
 }

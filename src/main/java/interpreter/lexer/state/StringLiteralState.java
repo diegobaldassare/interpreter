@@ -5,6 +5,7 @@ import interpreter.token.TokenImpl;
 import interpreter.token.TokenType;
 
 import static common.Constants.DOUBLE_QUOTE;
+import static common.Constants.QUOTE;
 
 class StringLiteralState extends LexerState {
 
@@ -12,7 +13,7 @@ class StringLiteralState extends LexerState {
 
     @Override
     boolean accepts(Character c) {
-        if (c.equals(DOUBLE_QUOTE)) {
+        if (c.equals(DOUBLE_QUOTE) || c.equals(QUOTE)) {
             if (openedString) return false;
             openedString = true;
         }
@@ -21,7 +22,7 @@ class StringLiteralState extends LexerState {
 
     @Override
     boolean isValidToken(LexerAutomaton context) {
-        return openedString && context.getC() == DOUBLE_QUOTE;
+        return openedString && (context.getC() == DOUBLE_QUOTE || context.getC() == QUOTE);
     }
 
     @Override

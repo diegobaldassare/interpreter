@@ -7,12 +7,12 @@ public final class Constants {
     }
 
     public static final Character DOUBLE_QUOTE = '\"';
+    public static final Character QUOTE = '\'';
     public static final Character SPACE = ' ';
     public static final String ALPHANUMERIC = "[a-zA-Z|0-9]";
     public static final String NUMBER = "[0-9]";
-
-
     public static final String NUMBERS = "[0-9]*";
+
     public static final String NOT_A_DOUBLE_QUOTE = "[^\"]";
     public static final String SEPARATOR = ";|:|=|\\)|\\(";
     public static final String LETTER = "[a-zA-Z]";
