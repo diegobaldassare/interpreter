@@ -33,53 +33,80 @@ public class InterpreterTest {
     }
 
     @Test
-    public void test002_should_assign_an_expression_to_a_variable() {
+    public void test002_should_assign_a_value_to_a_variable() {
         test001_should_declare_a_variable();
         Memory<String, Value> expected = new MemoryImpl();
-        expected.saveOrUpdate("variable1", new NumberValue(9));
-        interpreter.interpret("variable1 = 2 * 5 - 1;");
+        expected.saveOrUpdate("variable1", new NumberValue(5));
+        interpreter.interpret("variable1 = 5;");
         assertEquals(expected, actualMemory);
     }
-//
-//    @Test
-//    public void test003_should_print_a_value() {
-//        Terminal expected = new TerminalHistory();
-//        expected.print("2");
-//        interpreter.interpret("print(2);");
-//        assertEquals(expected, actualTerminal);
-//    }
 
     @Test
-    public void test004_should_declare_and_assign_an_expression() {
+    public void test003_should_print_a_value() {
+        Terminal expected = new TerminalHistory();
+        expected.print("2");
+        interpreter.interpret("print(2);");
+        assertEquals(expected, actualTerminal);
+    }
+
+    @Test
+    public void test004_should_declare_and_assign_a_value() {
         Memory<String, Value> expected = new MemoryImpl();
         expected.saveOrUpdate("variable2", new NumberValue(5));
         interpreter.interpret("let variable2: number = 5;");
         assertEquals(expected, actualMemory);
     }
 
-//    @Test
-//    public void test004() {
-//        interpreter.interpret("let var2: number;");
-//        interpreter.interpret("var2 = var1 - 5 * (2 - 3);");
-//    }
-//
-//    @Test
-//    public void test005() {
-//        interpreter.interpret("print(var2 + 1);");
-//    }
-//
-//    @Test
-//    public void test006() {
-//        interpreter.interpret("print(var1);");
-//    }
-//
-//    @Test
-//    public void test007() {
-//        interpreter.interpret("let var3: string;");
-//    }
-//
-//    @Test
-//    public void test008() {
-//        interpreter.interpret("print(2);");
-//    }
+    @Test
+    public void test005_should_declare_and_assign_an_expression() {
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable2", new NumberValue(9));
+        interpreter.interpret("let variable2: number = 2 * 5 - 1;");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test006_should_override_a_value_to_a_variable() {
+        test001_should_declare_a_variable();
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable1", new NumberValue(5));
+        interpreter.interpret("variable1 = 5;");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test007_should_use_the_value_of_a_variable() {
+        test001_should_declare_a_variable();
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable1", new NumberValue(5));
+        interpreter.interpret("variable1 = 5;");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test008_should_increment_the_value_of_a_variable() {
+        test001_should_declare_a_variable();
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable1", new NumberValue(5));
+        interpreter.interpret("variable1 = 5;");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test009_should_print_a_variable() {
+        test001_should_declare_a_variable();
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable1", new NumberValue(5));
+        interpreter.interpret("variable1 = 5;");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test010_should_print_an_expression() {
+        test001_should_declare_a_variable();
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("variable1", new NumberValue(5));
+        interpreter.interpret("variable1 = 5;");
+        assertEquals(expected, actualMemory);
+    }
 }

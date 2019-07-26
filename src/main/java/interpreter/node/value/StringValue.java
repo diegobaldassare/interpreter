@@ -1,7 +1,5 @@
 package interpreter.node.value;
 
-import interpreter.interpreter.InterpreterException;
-
 public class StringValue extends Value {
 
     private String value;
@@ -17,10 +15,50 @@ public class StringValue extends Value {
 
     @Override
     public void setValue(Value newValue) {
-        if (newValue.getDataType() != getDataType())
-            throw new InterpreterException("the value has a different data type to the result expression");
+        verifyMismatch(newValue);
         this.value = newValue.toString();
     }
+
+    @Override
+    Value add(NumberValue value) {
+        return new StringValue(this.value + value.toString());
+    }
+
+    @Override
+    Value add(StringValue value) {
+        return new StringValue(this.value + value.toString());
+    }
+
+    @Override
+    Value subtract(NumberValue value) {
+        throw new UnsupportedOperationException("Can not subtract a string");
+    }
+
+    @Override
+    Value subtract(StringValue value) {
+        throw new UnsupportedOperationException("Can not subtract a string");
+    }
+
+    @Override
+    Value multiply(NumberValue value) {
+        throw new UnsupportedOperationException("Can not multiply a string");
+    }
+
+    @Override
+    Value multiply(StringValue value) {
+        throw new UnsupportedOperationException("Can not multiply a string");
+    }
+
+    @Override
+    Value divide(NumberValue value) {
+        throw new UnsupportedOperationException("Can not divide a string");
+    }
+
+    @Override
+    Value divide(StringValue value) {
+        throw new UnsupportedOperationException("Can not divide a string");
+    }
+
 
     @Override
     public boolean equals(Object o) {

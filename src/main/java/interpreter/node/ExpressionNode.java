@@ -1,5 +1,6 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
 import interpreter.node.value.Value;
 
 public abstract class ExpressionNode extends ASTNode {
@@ -12,4 +13,9 @@ public abstract class ExpressionNode extends ASTNode {
     }
 
     public abstract Value value();
+
+    @Override
+    public void accept(ASTVisitor visitor) {
+        // does nothing
+    }
 }

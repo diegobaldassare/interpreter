@@ -4,7 +4,6 @@ import interpreter.interpreter.visitor.ASTVisitor;
 import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
 import interpreter.node.*;
-import interpreter.node.operation.BinaryOperationNode;
 import interpreter.node.value.DataType;
 import interpreter.node.value.Value;
 import interpreter.parser.Parser;
@@ -80,11 +79,6 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     }
 
     @Override
-    public void visitBinaryOperation(BinaryOperationNode node) {
-
-    }
-
-    @Override
     public void visitIdentifier(IdentifierNode node) {
         verifyDeclaration(node.getIdentifier());
         memory.findById(node.getIdentifier()).ifPresent(node::setValue);
@@ -97,14 +91,14 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     }
 
     private void verifyAssignation(String identifier) {
-        if (memory.findById(identifier).isPresent()) {
+        if (!memory.findById(identifier).isPresent()) {
             throw new InterpreterException("identifier \'" + identifier + "\' is not declared");
         }
     }
 
     private void verifyDeclarationAndAssignationTypes(DataType declaredDataType, DataType assignedDataType, String identifier) {
         if (!declaredDataType.equals(assignedDataType)) {
-            throw new InterpreterException("cannot assign a \'" + assignedDataType +
+            throw new InterpreterException("can not assign a \'" + assignedDataType +
                     "\' to the identifier \'" + identifier + "\' of type \'" + declaredDataType + "\'.");
         }
     }
