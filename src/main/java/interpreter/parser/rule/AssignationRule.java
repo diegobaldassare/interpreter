@@ -1,6 +1,7 @@
-package interpreter.parser.rules;
+package interpreter.parser.rule;
 
 import interpreter.node.ASTNode;
+import interpreter.node.AssignationNode;
 import interpreter.token.Token;
 import interpreter.token.TokenType;
 
@@ -21,7 +22,12 @@ public class AssignationRule extends AbstractRule {
     }
 
     @Override
-    public ASTNode generateAST() {
-        return null;
+    public ASTNode generateASTNode(List<Token> statement) {
+        return new AssignationNode(
+                statement.get(0).line(),
+                statement.get(0).fromColumn(),
+                statement.get(0).toColumn(),
+                statement.get(0).value(),
+                ExpressionRule.generateExpression(statement.subList(2, statement.size())));
     }
 }

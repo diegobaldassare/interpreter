@@ -1,11 +1,12 @@
 package interpreter.node;
 
-public class DeclarationNode implements ASTNode {
+public class DeclarationNode extends ASTNode {
 
     private String dataType;
     private String identifier;
 
-    public DeclarationNode(String dataType, String identifier) {
+    public DeclarationNode(int line, int fromColumn, int toColumn, String dataType, String identifier) {
+        super(line, fromColumn, toColumn);
         this.dataType = dataType;
         this.identifier = identifier;
     }

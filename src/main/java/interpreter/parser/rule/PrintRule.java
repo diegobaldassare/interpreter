@@ -1,6 +1,7 @@
-package interpreter.parser.rules;
+package interpreter.parser.rule;
 
 import interpreter.node.ASTNode;
+import interpreter.node.PrintNode;
 import interpreter.token.Token;
 import interpreter.token.TokenType;
 
@@ -17,7 +18,11 @@ public class PrintRule extends AbstractRule {
     }
 
     @Override
-    public ASTNode generateAST() {
-        return null;
+    public ASTNode generateASTNode(List<Token> statement) {
+        return new PrintNode(
+                statement.get(0).line(),
+                statement.get(0).fromColumn(),
+                statement.get(0).toColumn(),
+                ExpressionRule.generateExpression(statement.subList(2, statement.size() - 1)));
     }
 }

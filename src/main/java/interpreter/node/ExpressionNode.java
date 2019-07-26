@@ -1,6 +1,10 @@
 package interpreter.node;
 
-public abstract class ExpressionNode implements ASTNode {
+public abstract class ExpressionNode extends ASTNode {
+
+    public ExpressionNode(int line, int fromColumn, int toColumn) {
+        super(line, fromColumn, toColumn);
+    }
 
     @Override
     public void accept(NodeVisitor visitor) {

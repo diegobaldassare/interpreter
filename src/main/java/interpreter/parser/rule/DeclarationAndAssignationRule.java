@@ -1,4 +1,4 @@
-package interpreter.parser.rules;
+package interpreter.parser.rule;
 
 import interpreter.node.ASTNode;
 import interpreter.token.Token;
@@ -20,7 +20,7 @@ public class DeclarationAndAssignationRule extends AbstractRule {
     }
 
     @Override
-    public ASTNode generateAST() {
+    public ASTNode generateASTNode(List<Token> statement) {
         return null;
     }
 }

@@ -1,11 +1,12 @@
 package interpreter.node;
 
-public class AssignationNode implements ASTNode {
+public class AssignationNode extends ASTNode {
 
     private String identifier;
     private ExpressionNode expression;
 
-    public AssignationNode(String identifier, ExpressionNode expression) {
+    public AssignationNode(int line, int fromColumn, int toColumn, String identifier, ExpressionNode expression) {
+        super(line, fromColumn, toColumn);
         this.identifier = identifier;
         this.expression = expression;
     }

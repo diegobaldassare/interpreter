@@ -1,10 +1,11 @@
 package interpreter.node;
 
-public class PrintNode implements ASTNode {
+public class PrintNode extends ASTNode {
 
     private ExpressionNode argument;
 
-    public PrintNode(ExpressionNode argument) {
+    public PrintNode(int line, int fromColumn, int toColumn, ExpressionNode argument) {
+        super(line, fromColumn, toColumn);
         this.argument = argument;
     }
 

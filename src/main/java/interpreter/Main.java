@@ -1,6 +1,6 @@
 package interpreter;
 
-import interpreter.node.ASTNode;
+import interpreter.node.AST;
 import interpreter.interpreter.Interpreter;
 import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
@@ -32,7 +32,7 @@ public class Main {
                         "print(var3 + 'world!');";     // print(Hello, world!)
 
         final List<Token> lex = lexer.lex(input);
-        final ASTNode parse = parser.parse(lex);
+        final AST parse = parser.parse(lex);
 
 //        interpreter.interpret(parse);
     }

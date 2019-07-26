@@ -1,12 +1,23 @@
-package interpreter.parser.rules;
+package interpreter.parser.rule;
 
 import interpreter.node.ASTNode;
+import interpreter.node.ExpressionNode;
+import interpreter.parser.rule.handler.AdditionRule;
 import interpreter.token.Token;
 import interpreter.token.TokenType;
 
 import java.util.List;
 
-public class ExpressionRule extends AbstractRule {
+public abstract class ExpressionRule extends AbstractRule {
+
+    public static ExpressionNode generateExpression(List<Token> statement) {
+        AdditionRule additionRule = new AdditionRule();
+        return additionRule.handle(statement);
+    }
+
+    protected abstract ExpressionRule next();
+
+    public abstract ExpressionNode handle(List<Token> statement);
 
     @Override
     public boolean matches(List<Token> statement) {
@@ -19,8 +30,9 @@ public class ExpressionRule extends AbstractRule {
                 doesNotContain(statement, TokenType.PRINT);
     }
 
+    // This method should not be used
     @Override
-    public ASTNode generateAST() {
-        return null;
+    public ASTNode generateASTNode(List<Token> statement) {
+        return generateExpression(statement);
     }
 }

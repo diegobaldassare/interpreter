@@ -1,6 +1,6 @@
 //package interpreter.interpreter;
 //
-//import interpreter.ast.ASTNode;
+//import interpreter.ast.AST;
 //import interpreter.lexer.Lexer;
 //import interpreter.lexer.state.LexerAutomaton;
 //import interpreter.parser.Parser;
@@ -13,7 +13,7 @@
 //    private final Stack<Symbol> stack = new Stack<>();
 //
 //    @Override
-//    public void interpret(ASTNode node) {
+//    public void interpret(AST node) {
 //
 //        node.accept(this);
 //    }

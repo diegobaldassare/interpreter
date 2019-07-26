@@ -1,6 +1,26 @@
 package interpreter.node;
 
-public interface ASTNode {
+public abstract class ASTNode implements AST {
 
-    public void accept(NodeVisitor visitor);
+    private int line;
+    private int fromColumn;
+    private int toColumn;
+
+    ASTNode(int line, int fromColumn, int toColumn) {
+        this.line = line;
+        this.fromColumn = fromColumn;
+        this.toColumn = toColumn;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getFromColumn() {
+        return fromColumn;
+    }
+
+    public int getToColumn() {
+        return toColumn;
+    }
 }
