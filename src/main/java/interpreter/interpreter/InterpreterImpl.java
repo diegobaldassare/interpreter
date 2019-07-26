@@ -5,6 +5,7 @@ import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
 import interpreter.node.*;
 import interpreter.node.operation.BinaryOperationNode;
+import interpreter.node.value.DataType;
 import interpreter.node.value.Value;
 import interpreter.parser.Parser;
 import interpreter.parser.ParserImpl;
@@ -60,7 +61,9 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     @Override
     public void visitAssignation(AssignationNode node) {
         verifyAssignation(node.getIdentifier());
-//        verifyDeclarationAndAssignationTypes(node.getExpression().value().getDataType(), , node.getIdentifier());
+        verifyDeclarationAndAssignationTypes(
+                node.getExpression().value().getDataType(),
+                memory.findById(node.getIdentifier()).get().getDataType(), node.getIdentifier());
         memory.findById(node.getIdentifier()).ifPresent(v -> v.setValue(node.getExpression().value()));
     }
 
@@ -72,8 +75,8 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     @Override
     public void visitDeclarationAndAssignation(DeclarationAndAssignationNode node) {
         verifyDeclaration(node.getIdentifier());
-//        verifyDeclarationAndAssignationTypes(node.getDataType());
-//        memory.saveOrUpdate(node.getIdentifier(), node.getExpression().value());
+        verifyDeclarationAndAssignationTypes(node.getDataType(), node.getExpression().value().getDataType(), node.getIdentifier());
+        memory.saveOrUpdate(node.getIdentifier(), node.getExpression().value());
     }
 
     @Override
@@ -99,10 +102,10 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
         }
     }
 
-    private void verifyDeclarationAndAssignationTypes(Value value, String type, String id) {
-//        if (!value.getDataType(type)) {
-//            throw new TypeMismatchException(String.format("%s is not of type %s", id, type));
-//            throw new InterpreterException("identifier \'" + identifier + "\' is not declared");
-//        }
+    private void verifyDeclarationAndAssignationTypes(DataType declaredDataType, DataType assignedDataType, String identifier) {
+        if (!declaredDataType.equals(assignedDataType)) {
+            throw new InterpreterException("cannot assign a \'" + assignedDataType +
+                    "\' to the identifier \'" + identifier + "\' of type \'" + declaredDataType + "\'.");
+        }
     }
 }
