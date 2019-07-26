@@ -14,18 +14,10 @@ public abstract class Value {
         return dataType;
     }
 
-    public Value add(Value value) {
-        return value.add(this);
-    }
-    public Value subtract(Value value) {
-        return value.subtract(this);
-    }
-    public Value multiply(Value value) {
-        return value.multiply(this);
-    }
-    public Value divide(Value value) {
-        return value.divide(this);
-    }
+    public abstract Value add(Value value);
+    public abstract Value subtract(Value value);
+    public abstract Value multiply(Value value);
+    public abstract Value divide(Value value);
 
     public abstract void setValue(Value newValue);
 

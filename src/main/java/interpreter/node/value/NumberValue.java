@@ -15,6 +15,19 @@ public class NumberValue extends Value {
         super(NUMBER_TYPE);
     }
 
+    public Value add(Value value) {
+        return value.add(this);
+    }
+    public Value subtract(Value value) {
+        return value.subtract(this);
+    }
+    public Value multiply(Value value) {
+        return value.multiply(this);
+    }
+    public Value divide(Value value) {
+        return value.divide(this);
+    }
+
     @Override
     public void setValue(Value newValue) {
         verifyMismatch(newValue);

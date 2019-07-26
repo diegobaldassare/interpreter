@@ -70,7 +70,7 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     public void visitPrint(PrintNode node) {
         terminal.print(node.getArgument().value().toString());
     }
-    
+
     @Override
     public void visitIdentifier(IdentifierNode node) {
         verifyDeclaration(node.getIdentifier());

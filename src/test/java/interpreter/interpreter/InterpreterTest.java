@@ -59,15 +59,15 @@ public class InterpreterTest {
     }
 
     @Test
-    public void test005_should_declare_and_assign_an_expression() {
+    public void test005_should_declare_and_assign_a_simple_expression() {
         Memory<String, Value> expected = new MemoryImpl();
-        expected.saveOrUpdate("var5", new NumberValue(9));
-        interpreter.interpret("let var5: number = 2 * 5 - 1;");
+        expected.saveOrUpdate("var5", new NumberValue(3));
+        interpreter.interpret("let var5: number = 2 + 1;");
         assertEquals(expected, actualMemory);
     }
 
     @Test
-    public void test006_should_override_a_value_to_a_variable() {
+    public void test006_should_override_a_string_value_to_a_variable() {
         Memory<String, Value> expected = new MemoryImpl();
         interpreter.interpret("let var6: string;");
 
@@ -77,6 +77,14 @@ public class InterpreterTest {
 
         expected.saveOrUpdate("var6", new StringValue("update"));
         interpreter.interpret("var6 = \"update\";");
+        assertEquals(expected, actualMemory);
+    }
+
+    @Test
+    public void test007_should_assign_an_expression() {
+        Memory<String, Value> expected = new MemoryImpl();
+        expected.saveOrUpdate("var7", new NumberValue(9));
+        interpreter.interpret("let var7: number = 2 * 5 - 1;");
         assertEquals(expected, actualMemory);
     }
 
