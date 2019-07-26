@@ -11,6 +11,11 @@ public class DeclarationNode extends ASTNode {
         this.identifier = identifier;
     }
 
+    public DeclarationNode(String dataType, String identifier) {
+        this.dataType = dataType;
+        this.identifier = identifier;
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
         visitor.visitDeclaration(this);
@@ -31,5 +36,13 @@ public class DeclarationNode extends ASTNode {
         DeclarationNode node = (DeclarationNode) o;
         return dataType.equals(node.dataType) &&
                 identifier.equals(node.identifier);
+    }
+
+    @Override
+    public String toString() {
+        return "DeclarationNode{" +
+                "dataType='" + dataType + '\'' +
+                ", identifier='" + identifier + '\'' +
+                '}';
     }
 }

@@ -11,6 +11,11 @@ public class AssignationNode extends ASTNode {
         this.expression = expression;
     }
 
+    public AssignationNode(String identifier, ExpressionNode expression) {
+        this.identifier = identifier;
+        this.expression = expression;
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
         visitor.visitAssignation(this);
@@ -31,5 +36,13 @@ public class AssignationNode extends ASTNode {
         AssignationNode node = (AssignationNode) o;
         return expression.equals(node.expression) &&
                 identifier.equals(node.identifier);
+    }
+
+    @Override
+    public String toString() {
+        return "AssignationNode{" +
+                "identifier='" + identifier + '\'' +
+                ", expression=" + expression +
+                '}';
     }
 }

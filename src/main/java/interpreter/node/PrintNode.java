@@ -9,6 +9,10 @@ public class PrintNode extends ASTNode {
         this.argument = argument;
     }
 
+    public PrintNode(ExpressionNode argument) {
+        this.argument = argument;
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
         visitor.visitPrint(this);
@@ -24,5 +28,12 @@ public class PrintNode extends ASTNode {
         if (o == null || getClass() != o.getClass()) return false;
         PrintNode node = (PrintNode) o;
         return argument.equals(node.argument);
+    }
+
+    @Override
+    public String toString() {
+        return "PrintNode{" +
+                "argument=" + argument +
+                '}';
     }
 }

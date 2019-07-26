@@ -12,6 +12,13 @@ public abstract class ASTNode implements AST {
         this.toColumn = toColumn;
     }
 
+    // For testing purpose
+    public ASTNode() {
+        this.line = 0;
+        this.fromColumn = 0;
+        this.toColumn = 0;
+    }
+
     public int getLine() {
         return line;
     }

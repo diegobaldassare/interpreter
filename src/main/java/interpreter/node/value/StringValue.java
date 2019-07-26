@@ -11,6 +11,10 @@ public class StringValue extends Value {
         this.value = value;
     }
 
+    public StringValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
 
@@ -27,5 +31,12 @@ public class StringValue extends Value {
         if (o == null || getClass() != o.getClass()) return false;
         StringValue node = (StringValue) o;
         return value.equals(node.value);
+    }
+
+    @Override
+    public String toString() {
+        return "StringValue{" +
+                "value='" + value + '\'' +
+                '}';
     }
 }

@@ -1,10 +1,11 @@
 package interpreter.node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ASTProgram implements AST {
 
-    private List<ASTNode> statements;
+    private List<ASTNode> statements = new ArrayList<>();
 
     @Override
     public void accept(NodeVisitor visitor) {
@@ -29,5 +30,10 @@ public class ASTProgram implements AST {
             if (!statements.get(i).equals(program.statements.get(i))) return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return statements.toString();
     }
 }

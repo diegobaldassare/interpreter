@@ -6,6 +6,9 @@ public abstract class ExpressionNode extends ASTNode {
         super(line, fromColumn, toColumn);
     }
 
+    public ExpressionNode() {
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
         visitor.visitExpression(this);

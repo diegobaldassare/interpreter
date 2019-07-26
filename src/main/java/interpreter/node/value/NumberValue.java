@@ -11,6 +11,10 @@ public class NumberValue extends Value {
         this.value = value;
     }
 
+    public NumberValue(int value) {
+        this.value = value;
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
 
@@ -27,5 +31,12 @@ public class NumberValue extends Value {
         if (o == null || getClass() != o.getClass()) return false;
         NumberValue node = (NumberValue) o;
         return value == node.value;
+    }
+
+    @Override
+    public String toString() {
+        return "NumberValue{" +
+                "value=" + value +
+                '}';
     }
 }
