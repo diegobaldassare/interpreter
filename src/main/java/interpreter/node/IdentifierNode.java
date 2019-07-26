@@ -1,6 +1,7 @@
 package interpreter.node;
 
 import interpreter.interpreter.visitor.ASTVisitor;
+import interpreter.node.value.Value;
 
 public class IdentifierNode extends ExpressionNode {
 
@@ -21,7 +22,7 @@ public class IdentifierNode extends ExpressionNode {
     }
 
     @Override
-    public String value() {
+    public Value value() {
         return null;
     }
 

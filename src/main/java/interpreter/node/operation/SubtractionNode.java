@@ -2,6 +2,8 @@ package interpreter.node.operation;
 
 import interpreter.interpreter.visitor.ASTVisitor;
 import interpreter.node.ExpressionNode;
+import interpreter.node.value.NumberValue;
+import interpreter.node.value.Value;
 
 public class SubtractionNode extends BinaryOperationNode {
 
@@ -14,8 +16,8 @@ public class SubtractionNode extends BinaryOperationNode {
     }
 
     @Override
-    String calculateValue(ExpressionNode left, ExpressionNode right) {
-        return left.value() + right.value();
+    Value calculateValue(ExpressionNode left, ExpressionNode right) {
+        return new NumberValue();
     }
 
     @Override

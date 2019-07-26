@@ -27,7 +27,7 @@ public class InterpreterTest {
     @Test
     public void test001_should_declare_a_variable() {
         Memory<String, Value> expected = new MemoryImpl();
-        expected.save("variable1", new NumberValue(0));
+        expected.saveOrUpdate("variable1", new NumberValue(0));
         interpreter.interpret("let variable1: number;");
         assertEquals(expected, actualMemory);
     }
@@ -35,7 +35,7 @@ public class InterpreterTest {
     @Test
     public void test002_should_assign_an_expression_to_a_variable() {
         Memory<String, Value> expected = new MemoryImpl();
-        expected.save("variable1", new NumberValue(9));
+        expected.saveOrUpdate("variable1", new NumberValue(9));
         interpreter.interpret("var1 = 2 * 5 - 1;");
         assertEquals(expected, actualMemory);
     }

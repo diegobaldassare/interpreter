@@ -1,6 +1,7 @@
 package interpreter.node;
 
 import interpreter.interpreter.visitor.ASTVisitor;
+import interpreter.node.value.Value;
 
 public abstract class ExpressionNode extends ASTNode {
 
@@ -16,5 +17,5 @@ public abstract class ExpressionNode extends ASTNode {
         visitor.visitExpression(this);
     }
 
-    public abstract String value();
+    public abstract Value value();
 }

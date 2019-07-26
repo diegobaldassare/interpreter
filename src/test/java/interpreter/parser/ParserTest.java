@@ -10,6 +10,7 @@ import interpreter.node.value.StringValue;
 import org.junit.Before;
 import org.junit.Test;
 
+import static interpreter.node.value.DataType.NUMBER_TYPE;
 import static junit.framework.TestCase.assertEquals;
 
 public class ParserTest {
@@ -26,7 +27,7 @@ public class ParserTest {
     @Test
     public void test001_DeclarationNode() {
         ASTProgram expected = new ASTProgram();
-        expected.getStatements().add(new DeclarationNode("number", "a"));
+        expected.getStatements().add(new DeclarationNode(NUMBER_TYPE, "a"));
         AST actual = parser.parse(lexer.lex("let a: number;"));
         assertEquals(expected, actual);
     }
@@ -74,7 +75,7 @@ public class ParserTest {
     @Test
     public void test007_DeclarationAndAssignationNode() {
         ASTProgram expected = new ASTProgram();
-        expected.getStatements().add(new DeclarationAndAssignationNode("number", "a", new NumberValue(4)));
+        expected.getStatements().add(new DeclarationAndAssignationNode(NUMBER_TYPE, "a", new NumberValue(4)));
         AST actual = parser.parse(lexer.lex("let a: number = 4;"));
         assertEquals(expected, actual);
     }

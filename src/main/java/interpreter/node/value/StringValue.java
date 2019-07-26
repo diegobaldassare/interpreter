@@ -7,12 +7,17 @@ public class StringValue extends Value {
     private String value;
 
     public StringValue(int line, int fromColumn, int toColumn, String value) {
-        super(line, fromColumn, toColumn);
+        super(line, fromColumn, toColumn, DataType.STRING_TYPE);
         this.value = value;
     }
 
     public StringValue(String value) {
+        super(DataType.STRING_TYPE);
         this.value = value;
+    }
+
+    public StringValue() {
+        super(DataType.STRING_TYPE);
     }
 
     @Override
@@ -21,8 +26,8 @@ public class StringValue extends Value {
     }
 
     @Override
-    public String value() {
-        return null;
+    public Value value() {
+        return this;
     }
 
     @Override
@@ -35,8 +40,11 @@ public class StringValue extends Value {
 
     @Override
     public String toString() {
-        return "StringValue{" +
-                "value='" + value + '\'' +
-                '}';
+        return value;
+    }
+
+    @Override
+    public void setValue(Value newValue) {
+
     }
 }

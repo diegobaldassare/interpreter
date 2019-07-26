@@ -1,6 +1,7 @@
 package interpreter.node.operation;
 
 import interpreter.node.ExpressionNode;
+import interpreter.node.value.Value;
 
 public abstract class BinaryOperationNode extends ExpressionNode {
 
@@ -19,11 +20,11 @@ public abstract class BinaryOperationNode extends ExpressionNode {
     }
 
     @Override
-    public String value() {
+    public Value value() {
         return calculateValue(left, right);
     }
 
-    abstract String calculateValue(ExpressionNode left, ExpressionNode right);
+    abstract Value calculateValue(ExpressionNode left, ExpressionNode right);
 
     @Override
     public boolean equals(Object o) {

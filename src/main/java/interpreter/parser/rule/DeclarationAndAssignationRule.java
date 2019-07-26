@@ -2,6 +2,7 @@ package interpreter.parser.rule;
 
 import interpreter.node.ASTNode;
 import interpreter.node.DeclarationAndAssignationNode;
+import interpreter.node.value.DataType;
 import interpreter.token.Token;
 import interpreter.token.TokenType;
 
@@ -26,7 +27,8 @@ public class DeclarationAndAssignationRule extends AbstractRule {
                 statement.get(0).line(),
                 statement.get(0).fromColumn(),
                 statement.get(0).toColumn(),
-                statement.get(3).value(),
+                statement.get(3).tokenType().equals(TokenType.STRING_TYPE) ?
+                        DataType.STRING_TYPE : DataType.NUMBER_TYPE,
                 statement.get(1).value(),
                 ExpressionRule.generateExpression(statement.subList(5, statement.size())));
     }

@@ -11,7 +11,7 @@ public class MemoryImpl implements Memory<String, Value> {
     private Map<String, Value> map = new HashMap<>();
 
     @Override
-    public void save(String identifier, Value value) {
+    public void saveOrUpdate(String identifier, Value value) {
         map.put(identifier, value);
     }
 

@@ -1,19 +1,20 @@
 package interpreter.node;
 
 import interpreter.interpreter.visitor.ASTVisitor;
+import interpreter.node.value.DataType;
 
 public class DeclarationNode extends ASTNode {
 
-    private String dataType;
-    private String identifier;
+    private final DataType dataType;
+    private final String identifier;
 
-    public DeclarationNode(int line, int fromColumn, int toColumn, String dataType, String identifier) {
+    public DeclarationNode(int line, int fromColumn, int toColumn, DataType dataType, String identifier) {
         super(line, fromColumn, toColumn);
         this.dataType = dataType;
         this.identifier = identifier;
     }
 
-    public DeclarationNode(String dataType, String identifier) {
+    public DeclarationNode(DataType dataType, String identifier) {
         this.dataType = dataType;
         this.identifier = identifier;
     }
@@ -23,7 +24,7 @@ public class DeclarationNode extends ASTNode {
         visitor.visitDeclaration(this);
     }
 
-    public String getDataType() {
+    public DataType getDataType() {
         return dataType;
     }
 

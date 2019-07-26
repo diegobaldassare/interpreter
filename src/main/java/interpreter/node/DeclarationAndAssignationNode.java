@@ -1,19 +1,20 @@
 package interpreter.node;
 
 import interpreter.interpreter.visitor.ASTVisitor;
+import interpreter.node.value.DataType;
 
 public class DeclarationAndAssignationNode extends ASTNode {
 
     private DeclarationNode declarationNode;
     private AssignationNode assignationNode;
 
-    public DeclarationAndAssignationNode(int line, int fromColumn, int toColumn, String dataType, String identifier, ExpressionNode expression) {
+    public DeclarationAndAssignationNode(int line, int fromColumn, int toColumn, DataType dataType, String identifier, ExpressionNode expression) {
         super(line, fromColumn, toColumn);
         this.declarationNode = new DeclarationNode(line, fromColumn, toColumn, dataType, identifier);
         this.assignationNode = new AssignationNode(line, fromColumn, toColumn, identifier, expression);
     }
 
-    public DeclarationAndAssignationNode(String dataType, String identifier, ExpressionNode expression) {
+    public DeclarationAndAssignationNode(DataType dataType, String identifier, ExpressionNode expression) {
         this.declarationNode = new DeclarationNode(dataType, identifier);
         this.assignationNode = new AssignationNode(identifier, expression);
     }
@@ -24,7 +25,7 @@ public class DeclarationAndAssignationNode extends ASTNode {
         visitor.visitAssignation(assignationNode);
     }
 
-    public String getDataType() {
+    public DataType getDataType() {
         return declarationNode.getDataType();
     }
 

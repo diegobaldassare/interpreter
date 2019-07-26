@@ -1,5 +1,6 @@
 package interpreter.node.value;
 
+import interpreter.interpreter.InterpreterException;
 import interpreter.interpreter.visitor.ASTVisitor;
 
 public class NumberValue extends Value {
@@ -7,12 +8,17 @@ public class NumberValue extends Value {
     private int value;
 
     public NumberValue(int line, int fromColumn, int toColumn, int value) {
-        super(line, fromColumn, toColumn);
+        super(line, fromColumn, toColumn, DataType.NUMBER_TYPE);
         this.value = value;
     }
 
     public NumberValue(int value) {
+        super(DataType.NUMBER_TYPE);
         this.value = value;
+    }
+
+    public NumberValue() {
+        super(DataType.NUMBER_TYPE);
     }
 
     @Override
@@ -21,8 +27,16 @@ public class NumberValue extends Value {
     }
 
     @Override
-    public String value() {
-        return null;
+    public void setValue(Value newValue) {
+        if (newValue.getDataType() != getDataType())
+            throw new InterpreterException("the value has a different data type to the result expression at line " +
+                    getLine() + ", between column " + getFromColumn() + " and " + getToColumn() + ".");
+        this.value = Integer.valueOf(newValue.toString());
+    }
+
+    @Override
+    public Value value() {
+        return this;
     }
 
     @Override
@@ -35,8 +49,6 @@ public class NumberValue extends Value {
 
     @Override
     public String toString() {
-        return "NumberValue{" +
-                "value=" + value +
-                '}';
+        return String.valueOf(value);
     }
 }
