@@ -1,5 +1,7 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 public abstract class ExpressionNode extends ASTNode {
 
     protected ExpressionNode(int line, int fromColumn, int toColumn) {
@@ -10,7 +12,7 @@ public abstract class ExpressionNode extends ASTNode {
     }
 
     @Override
-    public void accept(NodeVisitor visitor) {
+    public void accept(ASTVisitor visitor) {
         visitor.visitExpression(this);
     }
 

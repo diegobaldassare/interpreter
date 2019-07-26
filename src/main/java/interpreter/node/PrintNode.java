@@ -1,5 +1,7 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 public class PrintNode extends ASTNode {
 
     private ExpressionNode argument;
@@ -14,7 +16,7 @@ public class PrintNode extends ASTNode {
     }
 
     @Override
-    public void accept(NodeVisitor visitor) {
+    public void accept(ASTVisitor visitor) {
         visitor.visitPrint(this);
     }
 

@@ -1,5 +1,6 @@
 package interpreter.node.operation;
 
+import interpreter.interpreter.visitor.ASTVisitor;
 import interpreter.node.ExpressionNode;
 
 public class MultiplicationNode extends BinaryOperationNode {
@@ -15,5 +16,10 @@ public class MultiplicationNode extends BinaryOperationNode {
     @Override
     String calculateValue(ExpressionNode left, ExpressionNode right) {
         return left.value() + right.value();
+    }
+
+    @Override
+    public void accept(ASTVisitor visitor) {
+
     }
 }

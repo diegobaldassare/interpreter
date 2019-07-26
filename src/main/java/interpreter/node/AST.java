@@ -1,6 +1,8 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 public interface AST {
 
-    public void accept(NodeVisitor visitor);
+    public void accept(ASTVisitor visitor);
 }

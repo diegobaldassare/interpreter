@@ -1,5 +1,7 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 public class DeclarationNode extends ASTNode {
 
     private String dataType;
@@ -17,7 +19,7 @@ public class DeclarationNode extends ASTNode {
     }
 
     @Override
-    public void accept(NodeVisitor visitor) {
+    public void accept(ASTVisitor visitor) {
         visitor.visitDeclaration(this);
     }
 

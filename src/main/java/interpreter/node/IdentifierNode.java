@@ -1,5 +1,7 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 public class IdentifierNode extends ExpressionNode {
 
     private String identifier;
@@ -14,8 +16,8 @@ public class IdentifierNode extends ExpressionNode {
     }
 
     @Override
-    public void accept(NodeVisitor visitor) {
-
+    public void accept(ASTVisitor visitor) {
+        visitor.visitIdentifier(this);
     }
 
     @Override

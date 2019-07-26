@@ -1,6 +1,6 @@
 package interpreter.node.value;
 
-import interpreter.node.NodeVisitor;
+import interpreter.interpreter.visitor.ASTVisitor;
 
 public class StringValue extends Value {
 
@@ -16,7 +16,7 @@ public class StringValue extends Value {
     }
 
     @Override
-    public void accept(NodeVisitor visitor) {
+    public void accept(ASTVisitor visitor) {
 
     }
 

@@ -1,5 +1,7 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,8 @@ public class ASTProgram implements AST {
     private List<ASTNode> statements = new ArrayList<>();
 
     @Override
-    public void accept(NodeVisitor visitor) {
-
+    public void accept(ASTVisitor visitor) {
+        visitor.visitProgram(this);
     }
 
     public List<ASTNode> getStatements() {

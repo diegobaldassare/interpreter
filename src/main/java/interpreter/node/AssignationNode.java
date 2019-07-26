@@ -1,5 +1,7 @@
 package interpreter.node;
 
+import interpreter.interpreter.visitor.ASTVisitor;
+
 public class AssignationNode extends ASTNode {
 
     private String identifier;
@@ -17,7 +19,7 @@ public class AssignationNode extends ASTNode {
     }
 
     @Override
-    public void accept(NodeVisitor visitor) {
+    public void accept(ASTVisitor visitor) {
         visitor.visitAssignation(this);
     }
 

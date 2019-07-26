@@ -5,6 +5,6 @@ import interpreter.node.AST;
 
 public interface Interpreter {
 
-    void interpret(AST node);
+    void interpret(AST program);
     void interpret(String input);
 }

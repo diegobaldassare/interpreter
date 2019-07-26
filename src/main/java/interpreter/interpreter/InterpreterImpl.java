@@ -1,150 +1,100 @@
-//package interpreter.interpreter;
-//
-//import interpreter.ast.AST;
-//import interpreter.lexer.Lexer;
-//import interpreter.lexer.state.LexerAutomaton;
-//import interpreter.parser.Parser;
-//
-//import java.util.Stack;
-//
-//public class InterpreterImpl implements Interpreter, NodeVisitor {
-//
-//    private final SymbolTable symbolTable = new SymbolTable();
-//    private final Stack<Symbol> stack = new Stack<>();
-//
-//    @Override
-//    public void interpret(AST node) {
-//
-//        node.accept(this);
-//    }
-//
-//    @Override
-//    public void visitCompound(Compound node) {
-//
-//        node.getChildren().forEach(children -> children.accept(this));
-//    }
-//
-//    @Override
-//    public void visitAssignation(Assignation node) {
-//
-//        final String varName = node.getLeft().getValue();
-//        final boolean isDefined = symbolTable.isDefined(varName);
-//        if (!isDefined) throw new RuntimeException("Undeclared variable");
-//        node.getRight().accept(this);
-//        symbolTable.define(varName, stack.pop());
-//    }
-//
-//    @Override
-//    public void visitDeclaration(Declaration node) {
-//
-//        final String varName = node.getLeft().getValue();
-//        symbolTable.define(varName, null);
-//    }
-//
-//    @Override
-//    public void visitVariable(Variable node) {
-//
-//        final String varName = node.getValue();
-//        final Symbol value = symbolTable.lookup(varName);
-//        if (value != null) stack.push(value);
-//        else throw new RuntimeException("Null pointer exception: " + varName);
-//    }
-//
-//    @Override
-//    public void visitBinaryOperation(BinaryOperation node) {
-//
-//        try {
-//            switch (node.getValue()) {
-//                case "+": {
-//                    evaluatePlus(node);
-//                    break;
-//                }
-//                case "-": {
-//                    evaluateMinus(node);
-//                    break;
-//                }
-//                case "*": {
-//                    evaluateMul(node);
-//                    break;
-//                }
-//                default: {
-//                    evaluateDiv(node);
-//                    break;
-//                }
-//            }
-//        } catch (ClassCastException e) {
-//            throw new RuntimeException("Incompatible types");
-//        }
-//    }
-//
-//    @Override
-//    public void visitNumber(NumberLiteral node) {
-//
-//        stack.push(new Symbol<>("number", Integer.valueOf(node.getValue())));
-//    }
-//
-//    @Override
-//    public void interpret(String input) {
-//        Lexer lexer = new LexerAutomaton();
-//        Parser parser = new ParserImpl();
-////        try {
-//////            interpret(interpreter.parser.parse(interpreter.lexer.lex(input)));
-////        } catch (RuntimeException e) {
-////        }
-//        System.out.println("14\n" +
-//                "8\n" +
-//                "Hello, world!");
-//    }
-//
-//    @Override
-//    public void visitString(StringLiteral node) {
-//
-//        stack.push(new Symbol<>("string", node.getValue()));
-//    }
-//
-//    @Override
-//    public void visitPrint(Print node) {
-//
-//        node.getNode().accept(this);
-//        System.out.println(stack.pop().getValue());
-//    }
-//
-//    private void evaluatePlus(BinaryOperation node) {
-//        node.getLeft().accept(this);
-//        node.getRight().accept(this);
-//
-//        if (stack.peek().getType().equals("number")) {
-//            final Integer val1 = (Integer) stack.pop().getValue();
-//            final Integer val2 = (Integer) stack.pop().getValue();
-//            stack.push(new Symbol<>("number", val2 + val1));
-//        } else {
-//            final String val1 = (String) stack.pop().getValue();
-//            final String val2 = (String) stack.pop().getValue();
-//            stack.push(new Symbol<>("string", val2.concat(val1)));
-//        }
-//    }
-//
-//    private void evaluateMinus(BinaryOperation node) {
-//        node.getLeft().accept(this);
-//        node.getRight().accept(this);
-//        final Integer val1 = (Integer) stack.pop().getValue();
-//        final Integer val2 = (Integer) stack.pop().getValue();
-//        stack.push(new Symbol<>("number", val2 - val1));
-//    }
-//
-//    private void evaluateMul(BinaryOperation node) {
-//        node.getLeft().accept(this);
-//        node.getRight().accept(this);
-//        final Integer val1 = (Integer) stack.pop().getValue();
-//        final Integer val2 = (Integer) stack.pop().getValue();
-//        stack.push(new Symbol<>("number", val2 * val1));
-//    }
-//
-//    private void evaluateDiv(BinaryOperation node) {
-//        node.getLeft().accept(this);
-//        node.getRight().accept(this);
-//        final Integer val1 = (Integer) stack.pop().getValue();
-//        final Integer val2 = (Integer) stack.pop().getValue();
-//        stack.push(new Symbol<>("number", val2 / val1));
-//    }
-//}
+package interpreter.interpreter;
+
+import interpreter.interpreter.visitor.ASTVisitor;
+import interpreter.lexer.Lexer;
+import interpreter.lexer.state.LexerAutomaton;
+import interpreter.node.*;
+import interpreter.node.operation.BinaryOperationNode;
+import interpreter.node.value.NumberValue;
+import interpreter.node.value.StringValue;
+import interpreter.node.value.Value;
+import interpreter.parser.Parser;
+import interpreter.parser.ParserImpl;
+
+public class InterpreterImpl implements Interpreter, ASTVisitor {
+
+    private final Memory<String, Value> memory;
+    private final Terminal terminal;
+
+    public InterpreterImpl() {
+        this.memory = new MemoryImpl();
+        this.terminal = new TerminalSystem();
+    }
+
+    public InterpreterImpl(Memory<String, Value> memory, Terminal terminal) {
+        this.memory = memory;
+        this.terminal = terminal;
+    }
+
+    public InterpreterImpl(Memory<String, Value> memory) {
+        this.memory = memory;
+        this.terminal = new TerminalSystem();
+    }
+
+    public InterpreterImpl(Terminal terminal) {
+        this.memory = new MemoryImpl();
+        this.terminal = terminal;
+    }
+
+    @Override
+    public void interpret(String input) {
+        Lexer lexer = new LexerAutomaton();
+        Parser parser = new ParserImpl();
+        interpret(parser.parse(lexer.lex(input)));
+    }
+
+    @Override
+    public void interpret(AST program) {
+
+    }
+
+    @Override
+    public void visitProgram(ASTProgram program) {
+
+    }
+
+    @Override
+    public void visitDeclaration(DeclarationNode node) {
+
+    }
+
+    @Override
+    public void visitAssignation(AssignationNode node) {
+
+    }
+
+    @Override
+    public void visitPrint(PrintNode node) {
+
+    }
+
+    @Override
+    public void visitDeclarationAndAssignation(DeclarationAndAssignationNode node) {
+
+    }
+
+    @Override
+    public void visitExpression(ExpressionNode node) {
+
+    }
+
+    @Override
+    public void visitBinaryOperation(BinaryOperationNode node) {
+
+    }
+
+    @Override
+    public void visitIdentifier(IdentifierNode node) {
+
+    }
+
+    @Override
+    public void visitNumber(NumberValue node) {
+
+    }
+
+    @Override
+    public void visitString(StringValue node) {
+
+    }
+}

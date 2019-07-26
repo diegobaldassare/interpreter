@@ -13,7 +13,7 @@ class SymbolState extends LexerState {
 
     private static SymbolState theInstance;
     private final Map<Character, TokenType> symbols;
-    private boolean readingSymbol; //fixes when more than one symbol is read all together
+    private boolean readingSymbol; //fixes when more than one symbol is findById all together
 
     // Singleton
     private SymbolState() {
