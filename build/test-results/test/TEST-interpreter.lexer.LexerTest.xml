@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="interpreter.lexer.LexerTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2019-07-26T17:00:34" hostname="Diego-Baldassare.local" time="0.008">
+  <properties/>
+  <testcase name="test015_MultipleSpaces" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test002_NumberLiteral" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test012_IdentifiersWithOperation" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test003_Identifier" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test007_Operator" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test006_StringType" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test016_MultipleSymbols" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test004_LetKeyword" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test009_SimpleOperation" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test008_Space" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test005_NumberType" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test013_AssignationWithType" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test001_StringLiteral" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test017_MultipleStrings" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test018_MultipleLines" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test014_PrintFunctionWithExpression" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test011_Parenthesis" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test010_OperationWithSpaces" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
