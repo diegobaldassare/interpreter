@@ -25,4 +25,19 @@ public class LiteralNode extends ExpressionNode {
     public void accept(ASTVisitor visitor) {
         // A literal does anything
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LiteralNode literalNode = (LiteralNode) o;
+        return value.equals(literalNode.value);
+    }
+
+    @Override
+    public String toString() {
+        return "LiteralNode{" +
+                "value=" + value +
+                '}';
+    }
 }
