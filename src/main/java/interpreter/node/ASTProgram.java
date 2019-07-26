@@ -18,4 +18,16 @@ public class ASTProgram implements AST {
     public void setStatements(List<ASTNode> statements) {
         this.statements = statements;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        ASTProgram program = (ASTProgram) obj;
+        for (int i = 0; i < statements.size(); i++) {
+            if (!statements.get(i).equals(program.statements.get(i))) return false;
+        }
+        return true;
+    }
 }

@@ -1,33 +1,25 @@
 package interpreter.parser;
 
-import interpreter.token.Token;
-import interpreter.token.TokenImpl;
-import interpreter.token.TokenType;
+import interpreter.lexer.Lexer;
+import interpreter.lexer.state.LexerAutomaton;
+import interpreter.node.AST;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class ParserTest {
 
     private Parser parser;
+    private Lexer lexer;
 
     @Before
     public void setUp() {
-//        parser = new ParserImpl();
+        lexer = new LexerAutomaton();
+        parser = new ParserImpl();
     }
 
     @Test
-    public void testSimpleOperationPrintParse() {
-        Token first = new TokenImpl(TokenType.PRINT, 0, 0, 0, "print");
-        Token second = new TokenImpl(TokenType.LEFT_PARENTHESIS, 0, 0, 0, "(");
-        Token third = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0, "2");
-        Token fourth = new TokenImpl(TokenType.PLUS_SYMBOL, 0, 0, 0, "+");
-        Token fifth = new TokenImpl(TokenType.NUMBER_LITERAL, 0, 0, 0, "2");
-        Token sixth = new TokenImpl(TokenType.RIGHT_PARENTHESIS, 0, 0, 0, ")");
-        Token seventh = new TokenImpl(TokenType.SEMICOLON, 0, 0, 0, ";");
-        List<Token> simplePrint = Arrays.asList(first, second, third, fourth, fifth, sixth, seventh);
-//        System.out.println(parser.parse(simplePrint).getValue());
+    public void test001_DeclarationNode() {
+        AST expected = ;
+        AST actual = parser.parse(lexer.lex("let a: number;"));
     }
 }

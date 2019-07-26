@@ -23,4 +23,13 @@ public class AssignationNode extends ASTNode {
     public ExpressionNode getExpression() {
         return expression;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AssignationNode node = (AssignationNode) o;
+        return expression.equals(node.expression) &&
+                identifier.equals(node.identifier);
+    }
 }

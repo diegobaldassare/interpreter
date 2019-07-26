@@ -19,4 +19,13 @@ public abstract class BinaryOperationNode extends ExpressionNode {
     }
 
     abstract String calculateValue(ExpressionNode left, ExpressionNode right);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BinaryOperationNode node = (BinaryOperationNode) o;
+        return left.equals(node.left) &&
+                right.equals(node.right);
+    }
 }

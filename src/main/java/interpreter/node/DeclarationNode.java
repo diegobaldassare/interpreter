@@ -23,4 +23,13 @@ public class DeclarationNode extends ASTNode {
     public String getIdentifier() {
         return identifier;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeclarationNode node = (DeclarationNode) o;
+        return dataType.equals(node.dataType) &&
+                identifier.equals(node.identifier);
+    }
 }

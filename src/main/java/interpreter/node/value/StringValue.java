@@ -20,4 +20,12 @@ public class StringValue extends Value {
     public String value() {
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StringValue node = (StringValue) o;
+        return value.equals(node.value);
+    }
 }

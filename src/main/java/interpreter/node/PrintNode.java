@@ -17,4 +17,12 @@ public class PrintNode extends ASTNode {
     public ExpressionNode getArgument() {
         return argument;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PrintNode node = (PrintNode) o;
+        return argument.equals(node.argument);
+    }
 }

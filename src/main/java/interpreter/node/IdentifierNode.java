@@ -18,4 +18,12 @@ public class IdentifierNode extends ExpressionNode {
     public String value() {
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IdentifierNode node = (IdentifierNode) o;
+        return identifier.equals(node.identifier);
+    }
 }

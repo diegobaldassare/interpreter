@@ -20,4 +20,12 @@ public class NumberValue extends Value {
     public String value() {
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NumberValue node = (NumberValue) o;
+        return value == node.value;
+    }
 }
