@@ -45,7 +45,7 @@ its value to the console together with a line break.
   * Subtraction
   * Multiplication
   * Division
-* Type "number" includes only integers
+* Type "number" includes only positive integers
 * All statements must be ended with ";"
 
 # Testing
