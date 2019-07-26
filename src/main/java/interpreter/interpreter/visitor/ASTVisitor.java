@@ -8,6 +8,5 @@ public interface ASTVisitor {
     void visitDeclaration(DeclarationNode node);
     void visitAssignation(AssignationNode node);
     void visitPrint(PrintNode node);
-    void visitDeclarationAndAssignation(DeclarationAndAssignationNode node);
     void visitIdentifier(IdentifierNode node);
 }
