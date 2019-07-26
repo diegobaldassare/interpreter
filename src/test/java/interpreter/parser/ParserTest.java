@@ -4,6 +4,7 @@ import interpreter.lexer.Lexer;
 import interpreter.lexer.state.LexerAutomaton;
 import interpreter.node.*;
 import interpreter.node.operation.AdditionNode;
+import interpreter.node.operation.MultiplicationNode;
 import interpreter.node.value.NumberValue;
 import interpreter.node.value.StringValue;
 import org.junit.Before;
@@ -47,10 +48,26 @@ public class ParserTest {
     }
 
     @Test
-    public void test004_PrintWithAdditionNode() {
+    public void test004_PrintWithBinaryOperation() {
         ASTProgram expected = new ASTProgram();
         expected.getStatements().add(new PrintNode(new AdditionNode(new NumberValue(2), new NumberValue(2))));
-        AST actual = parser.parse(lexer.lex("print(2 + 2)"));
+        AST actual = parser.parse(lexer.lex("print(2 + 2);"));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test005_PrintWithMultipleBinaryOperations() {
+        ASTProgram expected = new ASTProgram();
+        expected.getStatements().add(new PrintNode(new AdditionNode(new MultiplicationNode(new NumberValue(2), new NumberValue(3)), new NumberValue(1))));
+        AST actual = parser.parse(lexer.lex("print(2 * 3 + 1);"));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test006_AssignationWithIdentifier() {
+        ASTProgram expected = new ASTProgram();
+        expected.getStatements().add(new AssignationNode("a", new AdditionNode(new IdentifierNode("a"), new NumberValue(1))));
+        AST actual = parser.parse(lexer.lex("a = a + 1;"));
         assertEquals(expected, actual);
     }
 }

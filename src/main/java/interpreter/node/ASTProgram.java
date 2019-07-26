@@ -26,6 +26,7 @@ public class ASTProgram implements AST {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         ASTProgram program = (ASTProgram) obj;
+        if (statements.size() != program.statements.size()) return false;
         for (int i = 0; i < statements.size(); i++) {
             if (!statements.get(i).equals(program.statements.get(i))) return false;
         }

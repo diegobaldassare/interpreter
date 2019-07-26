@@ -9,6 +9,10 @@ public class IdentifierNode extends ExpressionNode {
         this.identifier = identifier;
     }
 
+    public IdentifierNode(String identifier) {
+        this.identifier = identifier;
+    }
+
     @Override
     public void accept(NodeVisitor visitor) {
 
@@ -25,5 +29,12 @@ public class IdentifierNode extends ExpressionNode {
         if (o == null || getClass() != o.getClass()) return false;
         IdentifierNode node = (IdentifierNode) o;
         return identifier.equals(node.identifier);
+    }
+
+    @Override
+    public String toString() {
+        return "IdentifierNode{" +
+                "identifier='" + identifier + '\'' +
+                '}';
     }
 }
