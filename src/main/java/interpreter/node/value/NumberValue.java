@@ -36,12 +36,12 @@ public class NumberValue extends Value {
 
     @Override
     Value add(NumberValue value) {
-        return new NumberValue(this.value + value.value);
+        return new NumberValue(value.value + this.value);
     }
 
     @Override
     Value add(StringValue value) {
-        return new StringValue(this.value + value.toString());
+        return new StringValue(value.toString() + this.value);
     }
 
     @Override

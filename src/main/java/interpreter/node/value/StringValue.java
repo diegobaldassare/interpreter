@@ -34,12 +34,12 @@ public class StringValue extends Value {
 
     @Override
     Value add(NumberValue value) {
-        return new StringValue(this.value + value.toString());
+        return new StringValue(value.toString() + this.value);
     }
 
     @Override
     Value add(StringValue value) {
-        return new StringValue(this.value + value.toString());
+        return new StringValue(value.toString() + this.value);
     }
 
     @Override

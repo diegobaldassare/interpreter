@@ -1,39 +1,23 @@
 package interpreter;
 
-import interpreter.node.AST;
 import interpreter.interpreter.Interpreter;
-import interpreter.lexer.Lexer;
-import interpreter.lexer.state.LexerAutomaton;
-import interpreter.token.Token;
-import interpreter.parser.Parser;
-
-import java.util.List;
+import interpreter.interpreter.InterpreterImpl;
 
 
 public class Main {
 
     public static void main(String[] args) {
-
-        final Lexer lexer = new LexerAutomaton();
-
-//        example1(lexer, parser, interpreter);
-    }
-
-    private static void example1(Lexer lexer, Parser parser, Interpreter interpreter) {
+        final Interpreter interpreter = new InterpreterImpl();
         final String input =
-                "let var1: number;" +
-                        "var1 = 2 / (5 - 1);" +
-                        "let var2: number;" +
-                        "var2 = var1 - 5 * (2 - 3);" +
-                        "print(var2 + 1);" +
-                        "print(var1);" +
-                        "let var3: string;" +
-                        "var3 = 'Hello, ';" +
-                        "print(var3 + 'world!');";     // print(Hello, world!)
+                        "let var1: number = 2 * 4 - 10;" + // var1 = 8 - 10 = -2
+                        "let var2: number; " +
+                        "var2 = var1 / 2 + 5 * 3; " +      // var2 = -1 + 15 = 14
+                        "print(var2 + 1); " +              // print(14 + 1)
+                        "print(\"result: \" + var1); " +   // print("result: " + -2)
+                        "let var3: string; " +
+                        "var3 = 'Hello, '; " +
+                        "print(var3 + 'world!');"; // print(Hello, world!)
 
-        final List<Token> lex = lexer.lex(input);
-        final AST parse = parser.parse(lex);
-
-//        interpreter.interpret(parse);
+        interpreter.interpret(input);
     }
 }
