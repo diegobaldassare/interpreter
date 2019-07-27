@@ -48,8 +48,6 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitProgram(ASTProgram program) {
-        program.getStatements();
-
         program.getStatements().forEach(node -> node.accept(this));
     }
 
@@ -67,7 +65,6 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
                 memory.findById(node.getIdentifier()).get().getDataType(), node.getIdentifier());
 
         Value result = node.getExpression().value();
-
         memory.findById(node.getIdentifier()).ifPresent(v -> v.setValue(result));
     }
 

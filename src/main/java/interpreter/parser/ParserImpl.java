@@ -14,14 +14,14 @@ public class ParserImpl implements Parser {
 
     @Override
     public AST parse(List<Token> input) {
-        List<Token> statements = removeSpaces(input);
+        List<Token> tokens = removeSpaces(input);
         ASTProgram result = new ASTProgram();
 
         int start = 0;
-        for (int end = 0; end < statements.size(); end++) {
-            if (statements.get(end).tokenType().equals(TokenType.SEMICOLON)) {
+        for (int end = 0; end < tokens.size(); end++) {
+            if (tokens.get(end).tokenType().equals(TokenType.SEMICOLON)) {
 
-                List<Token> statement = statements.subList(start, end);
+                List<Token> statement = tokens.subList(start, end);
                 for (Rule r: getRules()) {
 
                     if (r.matches(statement)) {
@@ -29,7 +29,7 @@ public class ParserImpl implements Parser {
                         break; // stop looking for another matching rule
                     }
                 }
-                start = end;
+                start = end + 1;
             }
         }
         return result;

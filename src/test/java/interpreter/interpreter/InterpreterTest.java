@@ -41,10 +41,10 @@ public class InterpreterTest {
 
     @Test
     public void test003_should_print_a_value() {
-        Terminal expected = new TerminalHistory();
-        expected.print("2");
+        Terminal expectedTerminal = new TerminalHistory();
+        expectedTerminal.print("2");
         interpreter.interpret("print(2);");
-        assertEquals(expected, actualTerminal);
+        assertEquals(expectedTerminal, actualTerminal);
     }
 
     @Test
@@ -96,31 +96,23 @@ public class InterpreterTest {
         assertEquals(memory.findById("a"), Optional.of(new NumberValue(2)));
         assertEquals(memory.findById("b"), Optional.of(new NumberValue(4)));
     }
-//
-//    @Test
-//    public void test008_should_increment_the_value_of_a_variable() {
-//        test001_should_declare_a_variable();
-//        Memory<String, Value> expected = new MemoryImpl();
-//        expected.saveOrUpdate("variable1", new NumberValue(5));
-//        interpreter.interpret("variable1 = 5;");
-//        assertEquals(expected, memory);
-//    }
-//
-//    @Test
-//    public void test009_should_print_a_variable() {
-//        test001_should_declare_a_variable();
-//        Memory<String, Value> expected = new MemoryImpl();
-//        expected.saveOrUpdate("variable1", new NumberValue(5));
-//        interpreter.interpret("variable1 = 5;");
-//        assertEquals(expected, memory);
-//    }
-//
-//    @Test
-//    public void test010_should_print_an_expression() {
-//        test001_should_declare_a_variable();
-//        Memory<String, Value> expected = new MemoryImpl();
-//        expected.saveOrUpdate("variable1", new NumberValue(5));
-//        interpreter.interpret("variable1 = 5;");
-//        assertEquals(expected, memory);
-//    }
+
+    @Test
+    public void test011_should_print_a_variable() {
+        Terminal expectedTerminal = new TerminalHistory();
+        expectedTerminal.print("test");
+        interpreter.interpret("let s: string = 'test';");
+        interpreter.interpret("print(s);");
+        assertEquals(expectedTerminal, actualTerminal);
+    }
+
+    @Test
+    public void test012_should_print_multiple_statements_and_increment_its_value() {
+        Terminal expectedTerminal = new TerminalHistory();
+        expectedTerminal.print("1");
+        expectedTerminal.print("2");
+        expectedTerminal.print("3");
+        interpreter.interpret("let c: number = 1; print(c); c = c + 1; print(c); c = c + 1; print(c);");
+        assertEquals(expectedTerminal, actualTerminal);
+    }
 }
