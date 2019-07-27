@@ -1,6 +1,5 @@
 package interpreter.node;
 
-import interpreter.interpreter.visitor.ASTVisitor;
 import interpreter.node.value.Value;
 
 public class LiteralNode extends ExpressionNode {
@@ -19,11 +18,6 @@ public class LiteralNode extends ExpressionNode {
     @Override
     public Value value() {
         return value;
-    }
-
-    @Override
-    public void accept(ASTVisitor visitor) {
-        // A literal does anything
     }
 
     @Override

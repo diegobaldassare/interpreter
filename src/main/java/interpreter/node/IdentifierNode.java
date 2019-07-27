@@ -1,5 +1,6 @@
 package interpreter.node;
 
+import interpreter.interpreter.MemoryImpl;
 import interpreter.interpreter.visitor.ASTVisitor;
 import interpreter.node.value.Value;
 
@@ -24,6 +25,7 @@ public class IdentifierNode extends ExpressionNode {
 
     @Override
     public Value value() {
+        MemoryImpl.getInstance().findById(identifier).ifPresent(v -> this.value = v);
         return value;
     }
 

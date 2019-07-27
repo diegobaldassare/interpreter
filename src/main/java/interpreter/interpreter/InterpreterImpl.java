@@ -15,7 +15,7 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     private final Terminal terminal;
 
     public InterpreterImpl() {
-        this.memory = new MemoryImpl();
+        this.memory = MemoryImpl.getInstance();
         this.terminal = new TerminalSystem();
     }
 
@@ -30,7 +30,7 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
     }
 
     public InterpreterImpl(Terminal terminal) {
-        this.memory = new MemoryImpl();
+        this.memory = MemoryImpl.getInstance();
         this.terminal = terminal;
     }
 
@@ -48,6 +48,8 @@ public class InterpreterImpl implements Interpreter, ASTVisitor {
 
     @Override
     public void visitProgram(ASTProgram program) {
+        program.getStatements();
+
         program.getStatements().forEach(node -> node.accept(this));
     }
 

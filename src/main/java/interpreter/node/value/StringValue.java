@@ -9,7 +9,7 @@ public class StringValue extends Value {
         this.value = value;
     }
 
-    public StringValue() {
+    StringValue() {
         super(DataType.STRING_TYPE);
     }
 

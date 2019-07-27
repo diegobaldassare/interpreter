@@ -11,7 +11,7 @@ public class NumberValue extends Value {
         this.value = value;
     }
 
-    public NumberValue() {
+    NumberValue() {
         super(NUMBER_TYPE);
     }
 

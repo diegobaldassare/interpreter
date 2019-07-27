@@ -9,6 +9,14 @@ import java.util.Optional;
 public class MemoryImpl implements Memory<String, Value> {
 
     private Map<String, Value> map = new HashMap<>();
+    private static final Memory<String, Value> instance = new MemoryImpl();
+
+    private MemoryImpl() {
+    }
+
+    public static Memory<String, Value> getInstance() {
+        return instance;
+    }
 
     @Override
     public void saveOrUpdate(String identifier, Value value) {
