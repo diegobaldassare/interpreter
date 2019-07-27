@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="interpreter.lexer.LexerTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2019-07-27T01:00:02" hostname="Diego-Baldassare.local" time="0.008">
+<testsuite name="interpreter.lexer.LexerTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2019-07-27T01:03:34" hostname="Diego-Baldassare.local" time="0.007">
   <properties/>
-  <testcase name="test015_MultipleSpaces" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test015_MultipleSpaces" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test002_NumberLiteral" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test012_IdentifiersWithOperation" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test003_Identifier" classname="interpreter.lexer.LexerTest" time="0.001"/>
-  <testcase name="test007_Operator" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test006_StringType" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test012_IdentifiersWithOperation" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test003_Identifier" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test007_Operator" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test006_StringType" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test016_MultipleSymbols" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test004_LetKeyword" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test009_SimpleOperation" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test20_MultipleSimpleQuoteStringLiterals" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test20_MultipleSimpleQuoteStringLiterals" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test008_Space" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test005_NumberType" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test013_AssignationWithType" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test013_AssignationWithType" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test001_StringLiteral" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test019_SimpleQuoteStringLiteral" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test017_MultipleStrings" classname="interpreter.lexer.LexerTest" time="0.0"/>
-  <testcase name="test018_MultipleLines" classname="interpreter.lexer.LexerTest" time="0.0"/>
+  <testcase name="test017_MultipleStrings" classname="interpreter.lexer.LexerTest" time="0.001"/>
+  <testcase name="test018_MultipleLines" classname="interpreter.lexer.LexerTest" time="0.001"/>
   <testcase name="test014_PrintFunctionWithExpression" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test011_Parenthesis" classname="interpreter.lexer.LexerTest" time="0.0"/>
   <testcase name="test010_OperationWithSpaces" classname="interpreter.lexer.LexerTest" time="0.0"/>
