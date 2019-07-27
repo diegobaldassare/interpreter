@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="interpreter.interpreter.InterpreterTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2019-07-27T00:57:42" hostname="Diego-Baldassare.local" time="0.057">
+  <properties/>
+  <testcase name="test001_should_declare_a_variable" classname="interpreter.interpreter.InterpreterTest" time="0.036"/>
+  <testcase name="test002_should_assign_a_value_to_a_variable" classname="interpreter.interpreter.InterpreterTest" time="0.006"/>
+  <testcase name="test003_should_print_a_value" classname="interpreter.interpreter.InterpreterTest" time="0.002"/>
+  <testcase name="test004_should_declare_and_assign_a_value" classname="interpreter.interpreter.InterpreterTest" time="0.001"/>
+  <testcase name="test005_should_declare_and_assign_a_simple_expression" classname="interpreter.interpreter.InterpreterTest" time="0.001"/>
+  <testcase name="test006_should_override_a_string_value_to_a_variable" classname="interpreter.interpreter.InterpreterTest" time="0.001"/>
+  <testcase name="test007_should_calculate_a_subtraction" classname="interpreter.interpreter.InterpreterTest" time="0.002"/>
+  <testcase name="test008_should_calculate_a_division" classname="interpreter.interpreter.InterpreterTest" time="0.001"/>
+  <testcase name="test009_should_calculate_an_expression" classname="interpreter.interpreter.InterpreterTest" time="0.001"/>
+  <testcase name="test010_should_use_the_value_of_a_variable" classname="interpreter.interpreter.InterpreterTest" time="0.002"/>
+  <testcase name="test011_should_print_a_variable" classname="interpreter.interpreter.InterpreterTest" time="0.001"/>
+  <testcase name="test012_should_print_multiple_statements_and_increment_its_value" classname="interpreter.interpreter.InterpreterTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
